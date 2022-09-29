@@ -1,0 +1,9 @@
+[submodule "lib/libft"]
+	path = lib/libft
+	url = git@github.com:clemedon/libft.git
+[submodule "lib/minilibx-linux"]
+	path = lib/minilibx-linux
+	url = git@github.com:42Paris/minilibx-linux.git
+[submodule "test/ft_mallocator"]
+	path = test/ft_mallocator
+	url = git@github.com:tmatis/ft_mallocator.git

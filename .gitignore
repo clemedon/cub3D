@@ -1,0 +1,6 @@
+tags
+.build
+cub3D
+*.o
+*.d
+*.a
