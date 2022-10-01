@@ -31,10 +31,8 @@ Example: `chore: Update issues`
 
 # ―――――――→ athirion ←―――――――
 
-feat: Add struct in .h
-- t_player
-- t_map
-- t_ray
+chore: Fusion
+- Fusion of the parsing and the ray casting parts
 
 # ――――――――→ cvidon ←――――――――
 
