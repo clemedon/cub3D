@@ -51,12 +51,21 @@ SRC_DIR     := src
 SRCS        := \
 			   main.c \
 			   load.c \
-			   init.c \
+			   init_cub.c \
 			   check_cub/check_cub.c \
 			   check_cub/check_col.c \
 			   check_cub/check_tex.c \
 			   check_cub/check_map.c \
-			   utils.c
+			   utils.c \
+			   event.c \
+			   init.c \
+			   init_player.c \
+			   draw.c \
+			   exit.c \
+			   player.c \
+			   projection.c \
+			   rays.c \
+			   wall.c
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 
 BUILD_DIR   := .build

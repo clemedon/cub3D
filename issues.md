@@ -31,9 +31,6 @@ Example: `chore: Update issues`
 
 # ―――――――→ athirion ←―――――――
 
-chore: Fusion
-- Fusion of the parsing and the ray casting parts
-
 # ――――――――→ cvidon ←――――――――
 
 feat: Add parsing

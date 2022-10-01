@@ -1,38 +1,27 @@
 #include "cube.h"
 
-void	ft_init_cub_color(t_cub *cub, const char **specs)
+void	init_rays(t_data *data)
 {
-	(void)specs;
-	cub->f_color_hex = 0;
-	cub->c_color_hex = 0;
-}
+	int	ray_id;
 
-void	ft_init_cub_texture(t_cub *cub, const char **specs)
-{
-	(void)specs;
-	cub->n_texture_fd = 0;
-	cub->s_texture_fd = 0;
-	cub->w_texture_fd = 0;
-	cub->e_texture_fd = 0;
-}
-
-void	ft_init_cub_map(t_cub *cub, const char **specs)
-{
-	(void)specs;
-	cub->map = 0;
-	cub->width = 0;
-	cub->height = 0;
-}
-
-void	ft_init_cub(t_cub *cub, const char **specs)
-{
-	cub->specs = specs;
-	if (!ft_check_cub (specs))
+	ray_id = 0;
+	while (ray_id < NUM_RAYS)
 	{
-		ft_freetab ((void **)specs);
-		ft_exit_error (__func__, ER_SPECS);
+		data->rays[ray_id].ray_facing_down = 0;
+		data->rays[ray_id].ray_facing_up = 0;
+		data->rays[ray_id].ray_facing_left = 0;
+		data->rays[ray_id].ray_facing_right = 0;
+		data->rays[ray_id].wall_hit_x = 0;
+		data->rays[ray_id].wall_hit_y = 0;
+		data->rays[ray_id].wall_hit_content = 0;
+		data->rays[ray_id].was_hit_vertical = 0;
+		ray_id ++;
 	}
-	ft_init_cub_color (cub, specs);
-	ft_init_cub_texture (cub, specs);
-	ft_init_cub_map (cub, specs);
+}
+
+void	init_mlx(t_data *data)
+{
+	data->mlx.mlx_ptr = mlx_init();
+	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	data->mlx.img_ptr = NULL;
 }
