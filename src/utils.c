@@ -1,6 +1,20 @@
 #include "cube.h"
 
 /*
+ ** @brief      Create rgb value
+ **
+ ** @param[in]  r the red value
+ ** @param[in]  g the green value
+ ** @param[in]  b the blue value
+ ** @return     An rgb number
+ */
+
+unsigned long ft_create_rgb(int r, int g, int b)
+{
+	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}
+
+/*
  ** @brief      Print a char tab.
  **
  ** @param[in]  tab a 2D array.
@@ -15,10 +29,141 @@ void	ft_print_chartab(const char **tab)
 		printf ("'%s'\n", tab[i]);
 }
 
+/*
+ ** @brief      Print an int tab.
+ **
+ ** @param[in]  tab a 2D array
+ ** @param[in]  w 2D array width
+ ** @param[in]  h 2D array height
+ */
+
+void	ft_print_inttab(int **tab, int width, int height)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			printf ("%i", tab[y][x]);
+			x++;
+		}
+		y++;
+		printf ("\n");
+	}
+}
+
+/*
+ ** @brief      Print a readable map
+ **
+ ** Replace the numbers with corresponding chars at display for readability.
+ **
+ ** @param[in]  tab a 2D array
+ ** @param[in]  width 2D array width
+ ** @param[in]  height 2D array height
+ */
+
+void	ft_print_readable_map(int **map, int width, int height)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		write (1, "'", 1);
+		while (x < width)
+		{
+			if (map[y][x] == -1)
+				write (1, " ", 1);
+			if (map[y][x] == 0)
+				write (1, "0", 1);
+			if (map[y][x] == 1)
+				write (1, "1", 1);
+			if (map[y][x] == 2)
+				write (1, "N", 1);
+			if (map[y][x] == 3)
+				write (1, "S", 1);
+			if (map[y][x] == 4)
+				write (1, "E", 1);
+			if (map[y][x] == 5)
+				write (1, "W", 1);
+			x++;
+		}
+		write (1, "'", 1);
+		y++;
+		write (1, "\n", 1);
+	}
+}
+
 int	ft_return_msg(const char *message, int retval)
 {
 	ft_putendl_fd ((char *)(unsigned long)message, 2);
 	return (retval);
+}
+
+/*
+ ** @brief      Turn 2D array into grid
+ **
+ ** "A rectangular array of elements of equal length."
+ **
+ ** The grid width should correspond to its longest row width.
+ **
+ ** @param[in]  map the cub specs map
+ ** @return     A pointer to the grid
+ */
+
+char	**ft_gridify(const char **tab, int width, int height)
+{
+	int		y;
+	char	**grid;
+
+	grid = malloc (sizeof (char *) * (height + 1));
+	if (!grid)
+		return (NULL);
+	y = 0;
+	while (y < height)
+	{
+		grid[y] = malloc (sizeof (char) * (width + 1));
+		if (!grid[y])
+		{
+			grid[y] = 0;
+			ft_freetab ((void **)grid);
+			return (NULL);
+		}
+		ft_memset ((void *)grid[y], ' ', width);
+		ft_memcpy ((void *)grid[y], (void *)tab[y], ft_strlen (tab[y]));
+		grid[y][width] = 0;
+		y++;
+	}
+	grid[y] = 0;
+	return (grid);
+}
+
+/*
+ ** @brief      Count occurences in string
+ **
+ ** @param[in]  s a string
+ ** @param[in]  c a character
+ ** @return     The number of occurence of c in s.
+ */
+
+size_t	ft_strchr_count(char const *s, int c)
+{
+	size_t	count;
+
+	count = 0;
+	while (*s)
+	{
+		if (*s == (unsigned char)c)
+			count++;
+		++s;
+	}
+	return (count);
 }
 
 /*

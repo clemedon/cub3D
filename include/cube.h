@@ -61,10 +61,10 @@
 # define FRONT		1
 
 /* Player position */
-# define N			2
-# define S			3
-# define E			4
-# define W			5
+/* # define N			2 */
+/* # define S			3 */
+/* # define E			4 */
+/* # define W			5 */
 
 /* Math constants */
 
@@ -90,13 +90,16 @@ typedef enum e_exit
 	FAILURE
 }	t_exit;
 
-typedef enum e_player_direction
+typedef enum e_map
 {
-	NORTH,
-	SOUTH,
-	EAST,
-	WEST
-}	t_player_direction;
+	VOID = -1,
+	ROOM,
+	WALL,
+	N,
+	S,
+	E,
+	W
+}	t_map;
 
 /*
  ** =========[ Struct ]============
@@ -104,16 +107,16 @@ typedef enum e_player_direction
 
 typedef struct s_cub
 {
-	const char	**specs;
-	int			f_color_hex;
-	int			c_color_hex;
-	int			n_texture_fd;
-	int			s_texture_fd;
-	int			w_texture_fd;
-	int			e_texture_fd;
-	int			**map;
-	int			width;
-	int			height;
+	const char		**specs;
+	int				width;
+	int				height;
+	int				**map;
+	unsigned long	f_color_hex;
+	unsigned long	c_color_hex;
+	int				n_texture_fd;
+	int				s_texture_fd;
+	int				w_texture_fd;
+	int				e_texture_fd;
 }	t_cub;
 
 typedef struct s_mlx
@@ -171,25 +174,25 @@ typedef struct s_cast
 	int		ray_facing_up;
 	int		ray_facing_right;
 	int		ray_facing_left;
-	float	x_inter;                                            
-	float	y_inter;                                            
-	float	x_step;                                             
-	float	y_step;                                             
-	float	current_x;                                          
-	float	current_y;                                          
-	float	next_horizontal_x;                                  
-	float	next_horizontal_y;                                  
-	float	next_vertical_y;                                    
-	float	next_vertical_x;                                    
-	int		horizontal_hit;                             
-	float	horizontal_hit_x;                                   
-	float	horizontal_hit_y;                                   
-	int		horizontal_content;                         
-	int		vertical_hit;                               
-	float	vertical_hit_x;                                     
-	float	vertical_hit_y;                                     
-	int		vertical_content;                           
-	float	horizontal_dist;                                    
+	float	x_inter;
+	float	y_inter;
+	float	x_step;
+	float	y_step;
+	float	current_x;
+	float	current_y;
+	float	next_horizontal_x;
+	float	next_horizontal_y;
+	float	next_vertical_y;
+	float	next_vertical_x;
+	int		horizontal_hit;
+	float	horizontal_hit_x;
+	float	horizontal_hit_y;
+	int		horizontal_content;
+	int		vertical_hit;
+	float	vertical_hit_x;
+	float	vertical_hit_y;
+	int		vertical_content;
+	float	horizontal_dist;
 	float	vertical_dist;
 }	t_cast;
 
@@ -209,15 +212,21 @@ typedef struct s_data
  ** utils.c
  */
 
-char		*ft_replace_char(char *str, char find, char replace);
-int			ft_open(const char *file);
-int			ft_return_msg(const char *message, int retval);
-int			ft_strtab_height (const char **tab);
-int			ft_strtab_width (const char **tab);
-t_bool		ft_str_onlywith(const char *str, const char *charset);
-t_bool		ft_strcharset(const char *str, const char *charset);
-void		ft_exit_error(const char *func, const char *strerror);
-void		ft_print_chartab(const char **tab);
+unsigned long	ft_create_rgb(int r, int g, int b);
+void			ft_print_chartab(const char **tab);
+void			ft_print_inttab(int **tab, int width, int height);
+void			ft_print_readable_map(int **map, int width, int height);
+int				ft_return_msg(const char *message, int retval);
+char    		**ft_gridify(const char **tab, int width, int height);
+size_t			ft_strchr_count(char const *s, int c);
+void			ft_exit_error(const char *func, const char *strerror);
+int				ft_open(const char *file);
+t_bool			ft_strcharset(const char *str, const char *charset);
+t_bool			ft_str_onlywith(const char *str, const char *charset);
+char    		*ft_replace_char(char *str, char find, char replace);
+int				ft_strtab_height(const char **tab);
+int				ft_strtab_width(const char **tab);
+
 
 /*
  ** parse.c
@@ -227,8 +236,8 @@ void		ft_print_chartab(const char **tab);
  ** check_cub/
  */
 
-t_bool		ft_check_map_enclosure(char **grid, int width, int height);
-char		**ft_mapgrid(const char **map, int width, int height);
+t_bool		ft_check_map_enclosure(char **map, int width, int height);
+char		**ft_gridify(const char **tab, int width, int height);
 
 t_bool		ft_check_map_limits(const char **map);
 t_bool		ft_check_map_spawn(const char **map);
@@ -330,9 +339,9 @@ void	init_player(t_data *data);
  ** init_cub.c
  */
 
-void		ft_init_cub_color(t_cub *cub, const char **specs);
-void		ft_init_cub_texture(t_cub *cub, const char **specs);
-void		ft_init_cub_map(t_cub *cub, const char **specs);
+t_bool		ft_init_cub_color(t_cub *cub, const char **specs);
+t_bool		ft_init_cub_texture(t_cub *cub, const char **specs);
+t_bool		ft_init_cub_map(t_cub *cub, const char **specs);
 void		ft_init_cub(t_cub *cub, const char **specs);
 
 /*

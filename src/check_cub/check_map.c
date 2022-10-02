@@ -5,11 +5,11 @@
  **
  ** - Check that every "NSEW0" are only in contact with a "NSEW01".
  **
- ** @param[in]  grid the cub specs map grid
+ ** @param[in]  map the cub map
  ** @return     True of false
  */
 
-t_bool	ft_check_map_enclosure(char **grid, int width, int height)
+t_bool	ft_check_map_enclosure(char **map, int width, int height)
 {
 	int		x;
 	int		y;
@@ -22,20 +22,20 @@ t_bool	ft_check_map_enclosure(char **grid, int width, int height)
 	{
 		while (x < width)
 		{
-			if (grid[y][x] == *MAP_ROOM || ft_strchr (MAP_SPAWN, grid[y][x]))
+			if (map[y][x] == *MAP_ROOM || ft_strchr (MAP_SPAWN, map[y][x]))
 			{
-				if (!grid[y][x - 1] || !grid[y][x + 1])
+				if (!map[y][x - 1] || !map[y][x + 1])
 					return (ft_return_msg (__func__, FALSE));
-				if (!grid[y - 1][x] || !grid[y + 1][x])
+				if (!map[y - 1][x] || !map[y + 1][x])
 					return (ft_return_msg (__func__, FALSE));
-				if (grid[y][x - 1])
-					check += (ft_strchr (MAP_INNER, grid[y][x - 1]) != NULL);
-				if (grid[y][x + 1])
-					check += (ft_strchr (MAP_INNER, grid[y][x + 1]) != NULL);
-				if (grid[y - 1][x])
-					check += (ft_strchr (MAP_INNER, grid[y - 1][x]) != NULL);
-				if (grid[y + 1][x])
-					check += (ft_strchr (MAP_INNER, grid[y + 1][x]) != NULL);
+				if (map[y][x - 1])
+					check += (ft_strchr (MAP_INNER, map[y][x - 1]) != NULL);
+				if (map[y][x + 1])
+					check += (ft_strchr (MAP_INNER, map[y][x + 1]) != NULL);
+				if (map[y - 1][x])
+					check += (ft_strchr (MAP_INNER, map[y - 1][x]) != NULL);
+				if (map[y + 1][x])
+					check += (ft_strchr (MAP_INNER, map[y + 1][x]) != NULL);
 				if (check != 4)
 					return (ft_return_msg (__func__, FALSE));
 				check = 0;
@@ -46,44 +46,6 @@ t_bool	ft_check_map_enclosure(char **grid, int width, int height)
 		y++;
 	}
 	return (TRUE);
-}
-
-/*
- ** @brief      Create a grid from the map
- **
- ** Unlike the map, the grid's rows have all the same width that correspond
- ** to the longest map row width.
- **
- ** @param[in]  map the cub specs map
- ** @return     A pointer to the grid
- */
-
-char	**ft_mapgrid(const char **map, int width, int height)
-{
-	int		y;
-	char	**grid;
-
-	grid = malloc (sizeof (char *) * (height + 1));
-	if (!grid)
-		return (NULL);
-	y = 0;
-	while (y < height)
-	{
-		grid[y] = malloc (sizeof (char) * (width + 1));
-		if (!grid[y])
-		{
-			grid[y] = 0;
-			ft_freetab ((void **)grid);
-			return (NULL);
-		}
-		ft_memset ((void *)grid[y], ' ', width);
-		ft_memcpy ((void *)grid[y], (void *)map[y], ft_strlen (map[y]));
-		grid[y][width] = 0;
-		y++;
-	}
-	grid[y] = 0;
-	ft_print_chartab ((const char **) grid);
-	return (grid);
 }
 
 /*
@@ -103,7 +65,7 @@ t_bool	ft_check_map_limits(const char **map)
 
 	height = ft_strtab_height (map);
 	width = ft_strtab_width (map);
-	grid = ft_mapgrid (map, width, height);
+	grid = ft_gridify (map, width, height);
 	if (!grid)
 		return (ft_return_msg (__func__, FALSE));
 	if (!ft_check_map_enclosure (grid, width, height))
@@ -179,6 +141,9 @@ t_bool	ft_check_map_global(const char **map)
  **
  ** @param[in]  specs the cub specs
  ** @return     True or false
+ **
+ ** TODO check if the first 'while' is really useful, knowing that a map
+ ** starting with an emptyline is not legal?
  */
 
 t_bool	ft_check_map(const char **specs)
@@ -189,6 +154,7 @@ t_bool	ft_check_map(const char **specs)
 	specs += (TEX_NUM * (**specs == TEX_IDS[0]));
 	while (**specs == '\0')
 		specs++;
+
 	if (!ft_check_map_global (specs))
 		return (ft_return_msg (__func__, FALSE));
 	if (!ft_check_map_spawn (specs))

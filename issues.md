@@ -34,6 +34,7 @@ Example: `chore: Update issues`
 # ――――――――→ cvidon ←――――――――
 
 feat: Add parsing
+feat: Add cub data init
 
 test: Fix ft_mallocator rule
 - Doesn't work with libmlx
