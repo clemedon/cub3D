@@ -34,7 +34,6 @@ Example: `chore: Update issues`
 # ――――――――→ cvidon ←――――――――
 
 feat: Add parsing
-feat: Add cub data init
 
 test: Fix ft_mallocator rule
 - Doesn't work with libmlx
@@ -54,10 +53,12 @@ refactor: Turn define into enum when it is possible
 
 ## Archive (newer to older)
 
+feat: Add cub init
+
 fix(exit): Clean exit
 - exit cub3d without any leaks
 
-test(): Draw border and cross
+test: Draw border and cross
 
 feat(window): Create a window
 - window should be close with escape
