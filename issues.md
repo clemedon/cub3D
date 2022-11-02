@@ -33,10 +33,9 @@ Example: `chore: Update issues`
 
 # ――――――――→ cvidon ←――――――――
 
-feat: Add parsing
+docs: Comment out the code
 
-test: Fix ft_mallocator rule
-- Doesn't work with libmlx
+feat: Add parsing
 
 docs(help): Fix 'recovery' chapter
 
