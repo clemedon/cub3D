@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	get_player_position(t_data *data)
+static void	ft_get_player_position(t_data *data)
 {
 	float	i;
 	float	j;
@@ -24,7 +24,7 @@ void	get_player_position(t_data *data)
 	}
 }
 
-void	get_player_orientation(t_data *data)
+static void	ft_get_player_orientation(t_data *data)
 {
 	if (data->player.d_start == N)
 		data->player.rotation_angle = -PI / 2;
@@ -36,12 +36,12 @@ void	get_player_orientation(t_data *data)
 		data->player.rotation_angle = PI;
 }
 
-void	init_player(t_data *data)
+void	ft_init_player(t_data *data)
 {
-	get_player_position(data);
+	ft_get_player_position(data);
 	data->player.dx = 0;
 	data->player.dy = 0;
-	get_player_orientation(data);
+	ft_get_player_orientation(data);
 	data->player.width = 1;
 	data->player.height = 1;
 	data->player.walk_direction = 0;

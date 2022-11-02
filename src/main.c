@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	ft_check_arg(const char *arg)
+static void	ft_check_arg(const char *arg)
 {
 	const char	*suffix = "x.cub";
 
@@ -25,9 +25,9 @@ int	main(int ac, char **argv)
 	{
 		ft_check_arg (argv[1]);
 		ft_init_cub (&data.cub, ft_load (argv[1]));
-		init_mlx(&data);
-		init_player(&data);
-		init_rays(&data);
+		ft_init_mlx(&data);
+		ft_init_player(&data);
+		ft_init_rays(&data);
 		ft_render(&data);
 		mlx_loop_hook(data.mlx.mlx_ptr, ft_waiting_event, &data);
 		mlx_hook(data.mlx.win_ptr, 2, 1L << 0, (void *)ft_key_event, &data);

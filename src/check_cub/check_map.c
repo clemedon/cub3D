@@ -9,7 +9,7 @@
  ** @return     True of false
  */
 
-t_bool	ft_check_map_enclosure(char **map, int width, int height)
+static t_bool	ft_check_map_enclosure(char **map, int width, int height)
 {
 	int		x;
 	int		y;
@@ -57,7 +57,7 @@ t_bool	ft_check_map_enclosure(char **map, int width, int height)
  ** @return     True or false.
  */
 
-t_bool	ft_check_map_limits(const char **map)
+static t_bool	ft_check_map_limits(const char **map)
 {
 	int		width;
 	int		height;
@@ -86,7 +86,7 @@ t_bool	ft_check_map_limits(const char **map)
  ** @return     True or false
  */
 
-t_bool	ft_check_map_spawn(const char **map)
+static t_bool	ft_check_map_spawn(const char **map)
 {
 	int	spawn_number;
 

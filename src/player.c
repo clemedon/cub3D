@@ -1,42 +1,42 @@
 #include "cube.h"
 
-void	move_up(t_data *data)
+void	ft_move_up(t_data *data)
 {
 	data->player.walk_direction = 1;
-	move_player(data);
+	ft_move_player(data);
 }
 
-void	move_down(t_data *data)
+void	ft_move_down(t_data *data)
 {
 	data->player.walk_direction = -1;
-	move_player(data);
+	ft_move_player(data);
 }
 
-void	move_left(t_data *data)
+void	ft_move_left(t_data *data)
 {
 	data->player.side_direction = -1;
-	side_move(data);
+	ft_side_move(data);
 }
 
-void	move_right(t_data *data)
+void	ft_move_right(t_data *data)
 {
 	data->player.side_direction = 1;
-	side_move(data);
+	ft_side_move(data);
 }
 
-void	turn_left(t_data *data)
+void	ft_turn_left(t_data *data)
 {
 	data->player.turn_direction = -1;
-	move_player(data);
+	ft_move_player(data);
 }
 
-void	turn_right(t_data *data)
+void	ft_turn_right(t_data *data)
 {
 	data->player.turn_direction = 1;
-	move_player(data);
+	ft_move_player(data);
 }
 
-void	side_move(t_data *data)
+void	ft_side_move(t_data *data)
 {
 	t_point	p;
 	float	step;
@@ -47,7 +47,7 @@ void	side_move(t_data *data)
 	p.x = data->player.x + step * sin(data->player.rotation_angle);
 	p.y = data->player.y - step * cos(data->player.rotation_angle);
 	data->player.side_direction = 0;
-	if (!is_wall(data, p.x, p.y))
+	if (!ft_is_wall(data, p.x, p.y))
 	{
 		data->player.x = p.x;
 		data->player.y = p.y;
@@ -55,7 +55,7 @@ void	side_move(t_data *data)
 	ft_render(data);
 }
 
-void	move_player(t_data *data)
+void	ft_move_player(t_data *data)
 {
 	t_point	p;
 	float	step;
@@ -69,7 +69,7 @@ void	move_player(t_data *data)
 	p.y = data->player.y + sin(data->player.rotation_angle) * step;
 	data->player.turn_direction = 0;
 	data->player.walk_direction = 0;
-	if (!is_wall(data, p.x, p.y))
+	if (!ft_is_wall(data, p.x, p.y))
 	{
 		data->player.x = p.x;
 		data->player.y = p.y;

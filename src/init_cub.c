@@ -1,6 +1,6 @@
 #include "cube.h"
 
-t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
+static t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
 {
 	char	**rgb;
 
@@ -29,7 +29,7 @@ t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
  ** @param[in]  specs the cub specs
  */
 
-t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
+static t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 {
 	char	*texture;
 	int		i;
@@ -67,7 +67,7 @@ t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
  ** TODO init utils .c ?
  */
 
-int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
+static int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
 {
 	int	i;
 
@@ -105,7 +105,7 @@ int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
  ** TODO init utils .c ?
  */
 
-int	**ft_map_to_int(const char **charmap, int width, int height)
+static int	**ft_map_to_int(const char **charmap, int width, int height)
 {
 	int	**intmap;
 	int	*introw;
@@ -140,7 +140,7 @@ int	**ft_map_to_int(const char **charmap, int width, int height)
  ** starting with an emptyline is not legal?
  */
 
-t_bool	ft_init_cub_map(t_cub *cub, const char **specs)
+static t_bool	ft_init_cub_map(t_cub *cub, const char **specs)
 {
 	while (ft_strchr(MAP_OUTER, **specs) == NULL || **specs == 0)
 		specs++;

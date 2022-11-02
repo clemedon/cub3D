@@ -12,7 +12,7 @@
  ** @return     True or false.
  */
 
-t_bool	ft_check_col_val(const char *specs)
+static t_bool	ft_check_col_val(const char *specs)
 {
 	int		r;
 	int		x;

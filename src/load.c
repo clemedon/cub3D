@@ -7,7 +7,7 @@
  ** @return     The line count
  */
 
-int	ft_line_counter(char *file)
+static int	ft_line_counter(char *file)
 {
 	long	r;
 	int		fd;

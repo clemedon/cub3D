@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	init_rays(t_data *data)
+void	ft_init_rays(t_data *data)
 {
 	int	ray_id;
 
@@ -19,7 +19,7 @@ void	init_rays(t_data *data)
 	}
 }
 
-void	init_mlx(t_data *data)
+void	ft_init_mlx(t_data *data)
 {
 	data->mlx.mlx_ptr = mlx_init();
 	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");

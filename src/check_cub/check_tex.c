@@ -9,7 +9,7 @@
  ** @return     True or false.
  */
 
-t_bool	ft_check_tex_value(const char *specs)
+static t_bool	ft_check_tex_value(const char *specs)
 {
 	int	fd;
 

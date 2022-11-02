@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+static void	ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
@@ -26,7 +26,7 @@ void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
 	{
 		if (point.x >= 0 && point.x < WIN_WIDTH
 			&& point.y >= 0 && point.y < WIN_HEIGHT)
-			my_mlx_pixel_put(mlx, point.x, point.y, point.color);
+			ft_my_mlx_pixel_put(mlx, point.x, point.y, point.color);
 		if (begin.x < end.x)
 			point.x += delta.x;
 		else
@@ -37,7 +37,7 @@ void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
 			point.y -= delta.y;
 		pixel --;
 	}
-}	
+}
 
 void	ft_draw_rect(t_data *data, t_point start, int width, int height)
 {
@@ -65,7 +65,7 @@ void	ft_draw_mini_map(t_data *data)
 	p.y = 0;
 	i = 0;
 	while (i < ROWS)
-	{	
+	{
 		j = 0;
 		p.x = 0;
 		while (j < COLS)
@@ -167,7 +167,7 @@ int	ft_render(t_data *data)
 	data->mlx.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img_ptr,
 			&data->mlx.bpp, &data->mlx.line_length, &data->mlx.endian);
-	cast_all_rays(data);
+	ft_cast_all_rays(data);
 	ft_3d_projection(data);
 	/* ft_draw_mini_map(data); */
 	/* ft_draw_grid(data); */

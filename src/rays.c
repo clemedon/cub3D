@@ -1,6 +1,6 @@
 #include "cube.h"
 
-float	normalize_angle(float angle)
+static float	ft_normalize_angle(float angle)
 {
 	angle = remainder(angle, TWO_PI);
 	if (angle < 0)
@@ -8,13 +8,13 @@ float	normalize_angle(float angle)
 	return (angle);
 }
 
-float	distance(float player_x, float player_y, float hit_x, float hit_y)
+static float	ft_dist(float player_x, float player_y, float hit_x, float hit_y)
 {
 	return (sqrt((hit_x - player_x) * (hit_x - player_x)
 			+ (hit_y - player_y) * (hit_y - player_y)));
 }
 
-void	ft_get_ray_orientation(t_cast *c, float ray_angle)
+static void	ft_get_ray_orientation(t_cast *c, float ray_angle)
 {
 	c->ray_facing_down = 0;
 	c->ray_facing_up = 0;
@@ -30,7 +30,7 @@ void	ft_get_ray_orientation(t_cast *c, float ray_angle)
 		c->ray_facing_left = !c->ray_facing_right;
 }
 
-void	ft_horizontal_step(t_data *data, float ray_angle, t_cast *c)
+static void	ft_horizontal_step(t_data *data, float ray_angle, t_cast *c)
 {
 	c->horizontal_hit = 0;
 	c->horizontal_hit_x = 0;
@@ -51,7 +51,7 @@ void	ft_horizontal_step(t_data *data, float ray_angle, t_cast *c)
 		c->x_step *= -1;
 }
 
-void	ft_horizontal_hit(t_data *data, t_cast *c)
+static void	ft_horizontal_hit(t_data *data, t_cast *c)
 {
 	c->next_horizontal_x = c->x_inter;
 	c->next_horizontal_y = c->y_inter;
@@ -62,7 +62,7 @@ void	ft_horizontal_hit(t_data *data, t_cast *c)
 		c->current_y = c->next_horizontal_y;
 		if (c->ray_facing_up)
 			c->current_y --;
-		if (is_wall(data, c->current_x, c->current_y))
+		if (ft_is_wall(data, c->current_x, c->current_y))
 		{
 			c->horizontal_hit_x = c->next_horizontal_x;
 			c->horizontal_hit_y = c->next_horizontal_y;
@@ -78,7 +78,7 @@ void	ft_horizontal_hit(t_data *data, t_cast *c)
 	}
 }
 
-void	ft_vertical_step(t_data *data, float ray_angle, t_cast *c)
+static void	ft_vertical_step(t_data *data, float ray_angle, t_cast *c)
 {
 	c->vertical_hit = 0;
 	c->vertical_hit_x = 0;
@@ -99,7 +99,7 @@ void	ft_vertical_step(t_data *data, float ray_angle, t_cast *c)
 		c->y_step *= -1;
 }
 
-void	ft_vertical_hit(t_data *data, t_cast *c)
+static void	ft_vertical_hit(t_data *data, t_cast *c)
 {
 	c->next_vertical_x = c->x_inter;
 	c->next_vertical_y = c->y_inter;
@@ -110,7 +110,7 @@ void	ft_vertical_hit(t_data *data, t_cast *c)
 		c->current_y = c->next_vertical_y;
 		if (c->ray_facing_left)
 			c->current_x --;
-		if (is_wall(data, c->current_x, c->current_y))
+		if (ft_is_wall(data, c->current_x, c->current_y))
 		{
 			c->vertical_hit_x = c->next_vertical_x;
 			c->vertical_hit_y = c->next_vertical_y;
@@ -126,21 +126,21 @@ void	ft_vertical_hit(t_data *data, t_cast *c)
 	}
 }
 
-void	ft_set_dist(t_data *data, t_cast *c)
+static void	ft_set_dist(t_data *data, t_cast *c)
 {
 	if (c->horizontal_hit)
-		c->horizontal_dist = distance(data->player.x, data->player.y,
+		c->horizontal_dist = ft_dist(data->player.x, data->player.y,
 				c->horizontal_hit_x, c->horizontal_hit_y);
 	else
 		c->horizontal_dist = FLT_MAX;
 	if (c->vertical_hit)
-		c->vertical_dist = distance(data->player.x, data->player.y,
+		c->vertical_dist = ft_dist(data->player.x, data->player.y,
 				c->vertical_hit_x, c->vertical_hit_y);
 	else
 		c->vertical_dist = FLT_MAX;
 }
 
-void	ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle)
+static void	ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle)
 {
 	if (c->vertical_dist < c->horizontal_dist)
 	{
@@ -165,11 +165,11 @@ void	ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle)
 	ray->ray_facing_right = c->ray_facing_right;
 }
 
-void	cast_ray(t_data *data, float ray_angle, t_ray *ray)
+static void	ft_cast_ray(t_data *data, float ray_angle, t_ray *ray)
 {
 	t_cast	c;
 
-	ray_angle = normalize_angle(ray_angle);
+	ray_angle = ft_normalize_angle(ray_angle);
 	ft_get_ray_orientation(&c, ray_angle);
 	ft_horizontal_step(data, ray_angle, &c);
 	ft_horizontal_hit(data, &c);
@@ -179,7 +179,7 @@ void	cast_ray(t_data *data, float ray_angle, t_ray *ray)
 	ft_dist_cmp(&c, ray, ray_angle);
 }
 
-void	cast_all_rays(t_data *data)
+void	ft_cast_all_rays(t_data *data)
 {
 	float	ray_angle;
 	int		ray_id;
@@ -188,7 +188,7 @@ void	cast_all_rays(t_data *data)
 	ray_id = 0;
 	while (ray_id < NUM_RAYS)
 	{
-		cast_ray(data, ray_angle, &data->rays[ray_id]);
+		ft_cast_ray(data, ray_angle, &data->rays[ray_id]);
 		ray_angle += FOV / NUM_RAYS;
 		ray_id ++;
 	}

@@ -213,149 +213,144 @@ typedef struct s_data
  */
 
 unsigned long	ft_create_rgb(int r, int g, int b);
-void			ft_print_chartab(const char **tab);
-void			ft_print_inttab(int **tab, int width, int height);
+void			ft_print_chartab(const char **tab); // XXX
+void			ft_print_inttab(int **tab, int width, int height); // XXX
 void			ft_print_readable_map(int **map, int width, int height);
 int				ft_return_msg(const char *message, int retval);
-char    		**ft_gridify(const char **tab, int width, int height);
-size_t			ft_strchr_count(char const *s, int c);
+char			**ft_gridify(const char **tab, int width, int height);
+size_t			ft_strchr_count(char const *s, int c); // XXX
 void			ft_exit_error(const char *func, const char *strerror);
 int				ft_open(const char *file);
 t_bool			ft_strcharset(const char *str, const char *charset);
 t_bool			ft_str_onlywith(const char *str, const char *charset);
-char    		*ft_replace_char(char *str, char find, char replace);
+char			*ft_replace_char(char *str, char find, char replace);
 int				ft_strtab_height(const char **tab);
 int				ft_strtab_width(const char **tab);
-
-
-/*
- ** parse.c
- */
 
 /*
  ** check_cub/
  */
 
-t_bool		ft_check_map_enclosure(char **map, int width, int height);
-char		**ft_gridify(const char **tab, int width, int height);
+/* t_bool		ft_check_map_enclosure(char **map, int width, int height); */
+/* t_bool		ft_check_map_limits(const char **map); */
+/* t_bool		ft_check_map_spawn(const char **map); */
+/* t_bool		ft_check_map_global(const char **map); */
+t_bool			ft_check_map(const char **specs);
 
-t_bool		ft_check_map_limits(const char **map);
-t_bool		ft_check_map_spawn(const char **map);
-t_bool		ft_check_map_global(const char **map);
-t_bool		ft_check_map(const char **specs);
+/* t_bool		ft_check_tex_value(const char *specs); */
+t_bool			ft_check_tex(const char **specs);
 
-t_bool		ft_check_tex_value(const char *specs);
-t_bool		ft_check_tex(const char **specs);
+/* t_bool		ft_check_col_value(const char *specs); */
+t_bool			ft_check_col(const char **specs);
 
-t_bool		ft_check_col_value(const char *specs);
-t_bool		ft_check_col(const char **specs);
-
-t_bool		ft_check_cub(const char **specs);
+t_bool			ft_check_cub(const char **specs);
 
 /*
  ** wall.c
  */
 
-int		is_wall(t_data *data, float x, float y);
+int				ft_is_wall(t_data *data, float x, float y);
 
 /*
  ** projection.c
  */
 
-void	ft_3d_projection(t_data *data);
+void			ft_3d_projection(t_data *data);
 
 /*
  ** rays.c
  */
 
-float	normalize_angle(float angle);
-float	distance(float player_x, float player_y, float hit_x, float hit_y);
-void	ft_get_ray_orientation(t_cast *c, float ray_angle);
-void	ft_horizontal_step(t_data *data, float ray_angle, t_cast *c);
-void	ft_vertical_step(t_data *data, float ray_angle, t_cast *c);
-void	ft_horizontal_hit(t_data *data, t_cast *c);
-void	ft_vertical_hit(t_data *data, t_cast *c);
-void	ft_set_dist(t_data *data, t_cast *c);
-void	ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle);
-void	cast_ray(t_data *data, float ray_angle, t_ray *ray);
-void	cast_all_rays(t_data *data);
+/* float ft_normalize_angle(float angle); */
+/* float ft_dist(float player_x, float player_y, float hit_x, float hit_y); */
+/* void			ft_get_ray_orientation(t_cast *c, float ray_angle); */
+/* void			ft_horizontal_step(t_data *data, float ray_angle, t_cast *c); */
+/* void			ft_horizontal_hit(t_data *data, t_cast *c); */
+/* void			ft_vertical_step(t_data *data, float ray_angle, t_cast *c); */
+/* void			ft_vertical_hit(t_data *data, t_cast *c); */
+/* void			ft_set_dist(t_data *data, t_cast *c); */
+/* void			ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle); */
+/* void			ft_cast_ray(t_data *data, float ray_angle, t_ray *ray); */
+void			ft_cast_all_rays(t_data *data);
 
 /*
  ** player.c
  */
 
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_right(t_data *data);
-void	move_left(t_data *data);
-void	turn_right(t_data *data);
-void	turn_left(t_data *data);
-void	side_move(t_data *data);
-void	move_player(t_data *data);
+void			ft_move_up(t_data *data);
+void			ft_move_down(t_data *data);
+void			ft_move_left(t_data *data);
+void			ft_move_right(t_data *data);
+void			ft_turn_left(t_data *data);
+void			ft_turn_right(t_data *data);
+void			ft_side_move(t_data *data);
+void			ft_move_player(t_data *data);
 
 /*
- ** exit.c
+ ** quit.c
  */
 
-void	ft_close(t_data *data);
+void			ft_quit(t_data *data);
 
 /*
  ** event.c
  */
 
-void	ft_key_event(int key, t_data *data);
-void	ft_mouse_event(t_data *data);
-int		ft_waiting_event(t_data *data);
+void			ft_key_event(int key, t_data *data);
+void			ft_mouse_event(t_data *data);
+int				ft_waiting_event(t_data *data);
 
 /*
  ** draw.c
  */
 
-/* void	my_mlx_pixel_put(t_*mlx, int x, int y, int color); */
-void ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
-/* void	ft_draw_rect(t_data *data, t_point start, int width, int height); */
-/* void	ft_draw_mini_map(t_data *data); */
-/* void	ft_draw_grid(t_data *data); */
-/* void	ft_draw_rays(t_data *data); */
-/* void	ft_draw_player(t_data *data); */
-int		ft_render(t_data *data);
+/* void		ft_my_mlx_pixel_put(t_*mlx, int x, int y, int color); */
+void			ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
+/* void		ft_draw_rect(t_data *data, t_point start, int width, int height); */
+/* void		ft_draw_mini_map(t_data *data); */
+/* void		ft_draw_grid(t_data *data); */
+/* void		ft_draw_rays(t_data *data); */
+/* void		ft_draw_player(t_data *data); */
+int				ft_render(t_data *data);
 
 /*
  ** init.c
  */
 
-void	init_rays(t_data *data);
-void	init_mlx(t_data *data);
+void			ft_init_rays(t_data *data);
+void			ft_init_mlx(t_data *data);
 
 /*
  ** init_player.c
  */
 
-/* void	get_player_position(t_data *data); */
-/* void	get_player_orientation(t_data *data); */
-void	init_player(t_data *data);
+/* void		ft_get_player_position(t_data *data); */
+/* void		ft_get_player_orientation(t_data *data); */
+void			ft_init_player(t_data *data);
 
 /*
  ** init_cub.c
  */
 
-t_bool		ft_init_cub_color(t_cub *cub, const char **specs);
-t_bool		ft_init_cub_texture(t_cub *cub, const char **specs);
-t_bool		ft_init_cub_map(t_cub *cub, const char **specs);
-void		ft_init_cub(t_cub *cub, const char **specs);
+/* t_bool	ft_init_cub_color(t_cub *cub, const char **specs); */
+/* t_bool	ft_init_cub_texture(t_cub *cub, const char **specs); */
+/* int		*ft_maprow_to_int(const char *maprow, int *introw, int width); */
+/* int		**ft_map_to_int(const char **charmap, int width, int height); */
+/* t_bool	ft_init_cub_map(t_cub *cub, const char **specs); */
+void			ft_init_cub(t_cub *cub, const char **specs);
 
 /*
  ** load.c
  */
 
-int			ft_line_counter(char *file);
-const char	**ft_load(char *file);
+/* int			ft_line_counter(char *file); */
+const char		**ft_load(char *file);
 
 /*
  ** main.c
  */
 
-void		ft_check_arg(const char *arg);
-int			main(int argc, char **argv);
+/* void		ft_check_arg(const char *arg); */
+int				main(int argc, char **argv);
 
 #endif

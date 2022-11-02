@@ -1,6 +1,6 @@
 #include "cube.h"
 
-int	is_wall(t_data *data, float x, float y)
+int	ft_is_wall(t_data *data, float x, float y)
 {
 	float	map_x;
 	float	map_y;

@@ -33,7 +33,7 @@ Example: `chore: Update issues`
 
 # ――――――――→ cvidon ←――――――――
 
-docs: Comment out the code
+refactor: Cleanup functions name
 
 feat: Add parsing
 
