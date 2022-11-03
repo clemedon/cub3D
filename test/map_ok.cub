@@ -1,10 +1,10 @@
 F 220,100,0
 C 225,200,255
 
-NO ./Makefile
-SO ./Makefile
-WE ./Makefile
-EA ./Makefile
+NO resources/brickov.xpm
+SO resources/walkstone.xpm
+WE resources/leavest.xpm
+EA resources/coal.xpm
 
 
 11111111111111111111
