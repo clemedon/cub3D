@@ -184,12 +184,15 @@ void	ft_cast_all_rays(t_data *data)
 	float	ray_angle;
 	int		ray_id;
 
-	ray_angle = data->player.rotation_angle - (FOV / 2);
+	/* ray_angle = data->player.rotation_angle - (FOV / 2); */
 	ray_id = 0;
 	while (ray_id < NUM_RAYS)
 	{
+		ray_angle = data->player.rotation_angle 
+			+ atan((ray_id - NUM_RAYS / 2) 
+			/ ((WIN_WIDTH / 2) / tan(FOV / 2)));
 		ft_cast_ray(data, ray_angle, &data->rays[ray_id]);
-		ray_angle += FOV / NUM_RAYS;
+		/* ray_angle += FOV / NUM_RAYS; */
 		ray_id ++;
 	}
 }

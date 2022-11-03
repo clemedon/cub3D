@@ -130,6 +130,17 @@ typedef struct s_mlx
 	int		line_length;
 }	t_mlx;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		endian;
+	int		line_length;
+	int		width;
+	char	*path;
+}	t_img;
+
 typedef struct s_point
 {
 	double	x;
@@ -304,7 +315,7 @@ int				ft_waiting_event(t_data *data);
  ** draw.c
  */
 
-/* void		ft_my_mlx_pixel_put(t_*mlx, int x, int y, int color); */
+void		ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 void			ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
 /* void		ft_draw_rect(t_data *data, t_point start, int width, int height); */
 /* void		ft_draw_mini_map(t_data *data); */

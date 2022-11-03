@@ -1,11 +1,11 @@
 #include "cube.h"
 
-static void	ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+void	ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = mlx->addr + (y * mlx->line_length + x * (mlx->bpp / 8));
-	*(unsigned int *) dst = color;
+	*(int *) dst = color;
 }
 
 void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
