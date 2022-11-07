@@ -1,7 +1,7 @@
 # @author   clemedon (Clément Vidon)
 ####################################### BEG_5 ####
 
-NAME        := cube_parsing
+NAME        := cub3D
 
 #------------------------------------------------#
 #   INGREDIENTS                                  #

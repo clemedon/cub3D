@@ -1,10 +1,10 @@
 F 80,84,92
 C 117,164,240
 
-NO ./Makefile
-SO ./Makefile
-WE ./Makefile
-EA ./Makefile
+NO ./resources/stone.xpm
+SO ./resources/coal.xpm
+WE ./resources/brickov.xpm
+EA ./resources/walkstone.xpm
 
 
 11111111111111111111

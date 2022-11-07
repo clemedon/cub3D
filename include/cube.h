@@ -90,6 +90,14 @@ typedef enum e_exit
 	FAILURE
 }	t_exit;
 
+typedef enum e_texture
+{
+	NO,
+	SO,
+	WE,
+	EA
+}	t_texture;
+
 typedef enum e_map
 {
 	VOID = -1,
@@ -127,10 +135,10 @@ typedef struct s_cub
 	unsigned long	f_color_hex;
 	unsigned long	c_color_hex;
 	t_text			texture[4];
-	char			*n_texture_fd;
-	char			*s_texture_fd;
-	char			*w_texture_fd;
-	char			*e_texture_fd;
+	char			*n_texture;
+	char			*s_texture;
+	char			*w_texture;
+	char			*e_texture;
 }	t_cub;
 
 typedef struct s_mlx

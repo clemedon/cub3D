@@ -42,27 +42,26 @@ void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)
 t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
 {
 	if (ray->was_hit_vertical && ray->ray_facing_right)
-		return (cub->texture[0]);
+		return (cub->texture[EA]);
 	else if (ray->was_hit_vertical && ray->ray_facing_left)
-		return (cub->texture[1]);			
+		return (cub->texture[WE]);			
 	else if (!ray->was_hit_vertical && ray->ray_facing_up)
-		return (cub->texture[2]);
+		return (cub->texture[NO]);
 	else
-		return (cub->texture[3]);
+		return (cub->texture[SO]);
 }
 
 void	ft_init_texture(t_data *data, t_cub *cub)
 {
 	int		i;
-	char	*t[4] = {"resources/brickov.xpm",
-		"resources/coal.xpm",
-		"resources/stone.xpm",
-		"resources/walkstone.xpm"};
-
+	
+	cub->texture[EA].path = cub->e_texture;
+	cub->texture[WE].path = cub->w_texture;
+	cub->texture[SO].path = cub->s_texture;
+	cub->texture[NO].path = cub->n_texture;
 	i = 0;
 	while (i < 4)
 	{
-		cub->texture[i].path = t[i];
 		cub->texture[i].img = mlx_xpm_file_to_image(data->mlx.mlx_ptr,
 				cub->texture[i].path,
 				&cub->texture[i].w,
