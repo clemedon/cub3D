@@ -43,14 +43,13 @@ static t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 		if (!texture)
 			return (FALSE);
 		if (i == 0)
-			cub->n_texture_fd = ft_open (texture);
+			cub->n_texture_fd = texture;
 		if (i == 1)
-			cub->s_texture_fd = ft_open (texture);
+			cub->s_texture_fd = texture;
 		if (i == 2)
-			cub->w_texture_fd = ft_open (texture);
+			cub->w_texture_fd = texture;
 		if (i == 3)
-			cub->e_texture_fd = ft_open (texture);
-		free (texture);
+			cub->e_texture_fd = texture;
 		i++;
 	}
 	return (TRUE);
