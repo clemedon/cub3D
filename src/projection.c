@@ -1,87 +1,102 @@
 #include "cube.h"
 
-void	ft_3d_projection(t_data *data)
+void	ft_draw_ceiling(t_data *data)
+{
+	t_point ceiling;
+
+	ceiling.x = 0;
+	ceiling.y = 0;
+	ceiling.color = data->cub.c_color_hex;
+	ft_draw_rect(data, ceiling, WIN_WIDTH, WIN_HEIGHT / 2);
+}
+
+void	ft_draw_floor(t_data *data)
+{
+	t_point	floor;
+
+	floor.x = 0;
+	floor.y = WIN_HEIGHT / 2;
+	floor.color = data->cub.f_color_hex;
+	ft_draw_rect(data, floor, WIN_WIDTH, WIN_HEIGHT / 2);
+}
+
+void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)
+{
+	p->perpendicular_dist = ray->distance * cos(ray->ray_angle - data->player.rotation_angle);
+	p->dist_proj_plane = (WIN_WIDTH / 2) / tan(FOV / 2);
+	p->proj_wall_height = (TILE_SIZE / p->perpendicular_dist) * p->dist_proj_plane;
+	p->wall_strip_height = (int)p->proj_wall_height;
+	p->top_wall.y = (WIN_HEIGHT / 2) - (p->wall_strip_height / 2);
+	if (p->top_wall.y < 0)
+		p->top_wall.y = 0;
+	p->bottom_wall.y = (WIN_HEIGHT / 2) + (p->wall_strip_height / 2);
+	if (ray->was_hit_vertical)
+		p->offset[0] = (int)ray->wall_hit_y % texture->w;
+	else
+		p->offset[0] = (int)ray->wall_hit_x % texture->w;
+	p->y = p->top_wall.y;
+	if (p->bottom_wall.y > WIN_HEIGHT)
+		p->bottom_wall.y = WIN_HEIGHT;
+}
+
+t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
+{
+	if (ray->was_hit_vertical && ray->ray_facing_right)
+		return (cub->texture[0]);
+	else if (ray->was_hit_vertical && ray->ray_facing_left)
+		return (cub->texture[1]);			
+	else if (!ray->was_hit_vertical && ray->ray_facing_up)
+		return (cub->texture[2]);
+	else
+		return (cub->texture[3]);
+}
+
+void	ft_init_texture(t_data *data, t_cub *cub)
 {
 	int		i;
-	float	wall_strip_height;
-	float	dist_proj_plane;
-	float	proj_wall_height;
-	float	perpendicular_dist;
-	t_point	top_wall;
-	t_point	bottom_wall;
-	t_point top_ceiling;
-	t_point bottom_ceiling;
-	t_point	top_floor;
-	t_point	bottom_floor;
-	t_img	texture;
-	
-	texture.path = "resources/walkstone.xpm";
-	texture.img = mlx_xpm_file_to_image(data->mlx.mlx_ptr, texture.path, &texture.width, &texture.width);
-	char	*texel;
-	texture.addr =  mlx_get_data_addr(texture.img, &texture.bpp, &texture.line_length, &texture.endian);
-	int		y;
-	int		offset[2];
-	int		dist_top;
+	char	*t[4] = {"resources/brickov.xpm",
+		"resources/coal.xpm",
+		"resources/stone.xpm",
+		"resources/walkstone.xpm"};
 
 	i = 0;
-	while (i < NUM_RAYS)
+	while (i < 4)
 	{
-		perpendicular_dist = data->rays[i].distance * cos(data->rays[i].ray_angle - data->player.rotation_angle);
-		dist_proj_plane = (WIN_WIDTH / 2) / tan(FOV / 2);
-		proj_wall_height = (TILE_SIZE / perpendicular_dist) * dist_proj_plane;
-		wall_strip_height = (int)proj_wall_height;
-		top_wall.x = i;
-		top_ceiling.x = i;
-		top_floor.x = i;
-		bottom_wall.x = i;
-		bottom_ceiling.x = i;
-		bottom_floor.x = i;
-		top_wall.y = (WIN_HEIGHT / 2) - (wall_strip_height / 2);
-		if (top_wall.y < 0)
-			top_wall.y = 0;
-		bottom_wall.y = (WIN_HEIGHT / 2) + (wall_strip_height / 2);
-		if (data->rays[i].was_hit_vertical)
-			offset[0] = ((int)data->rays[i].wall_hit_y % texture.width);
-		else
-			offset[0] = ((int)data->rays[i].wall_hit_x % texture.width);
-		y = top_wall.y;
-		if (bottom_wall.y > WIN_HEIGHT)
-			bottom_wall.y = WIN_HEIGHT;
-
-		while (y < bottom_wall.y)
-		{
-			dist_top = y + (wall_strip_height / 2) - (WIN_HEIGHT / 2);
-			offset[1] = dist_top * ((float)texture.width / wall_strip_height);
-			/* printf("offset[1] [%d]\n", offset[1]); */
-			/* printf("offset[0] [%d]\n", offset[0]); */
-			texel = texture.addr + (offset[1] * texture.line_length + offset[0] * (texture.bpp / 8));
-			/* printf("%s\n", texel); */
-			/* printf("%d\n", data->mlx.line_length); */
-			/* printf("%d\n", data->mlx.bpp); */
-			/* printf("%d\n", texture.line_length); */
-			/* printf("%d\n", texture.bpp); */
-			/* ft_my_mlx_pixel_put(&data->mlx, i, y, 0xff0000); */
-			ft_my_mlx_pixel_put(&data->mlx, i, y, *(int *)texel);
-			y++;
-		}
-		/* if (data->rays[i].was_hit_vertical) */
-		/* 	top_wall.color = 0xFFFFFF; */
-		/* else */
-		/* 	top_wall.color = 0xD4D2CD; */
-		bottom_wall.color = top_wall.color;
-		top_ceiling.color = data->cub.c_color_hex;
-		bottom_ceiling.color = top_ceiling.color;
-		top_floor.color = data->cub.f_color_hex;
-		bottom_floor.color = top_floor.color;
-		top_ceiling.y = 0;
-		bottom_ceiling.y = top_wall.y;
-		top_floor.y = bottom_wall.y;
-		bottom_floor.y = WIN_HEIGHT;
-		ft_draw_line(&data->mlx, top_floor, bottom_floor);
-		ft_draw_line(&data->mlx, top_ceiling, bottom_ceiling);
-		/* ft_draw_line(&data->mlx, top_wall, bottom_wall); */
-		i ++;
+		cub->texture[i].path = t[i];
+		cub->texture[i].img = mlx_xpm_file_to_image(data->mlx.mlx_ptr,
+				cub->texture[i].path,
+				&cub->texture[i].w,
+				&cub->texture[i].h);
+		cub->texture[i].addr =  mlx_get_data_addr(cub->texture[i].img,
+				&cub->texture[i].bpp,
+				&cub->texture[i].line_length,
+				&cub->texture[i].endian);
+		i++;
 	}
 }
 
 
+void	ft_3d_projection(t_data *data)
+{
+	int		i;
+	t_proj	p;
+	t_text	texture;
+	
+	i = 0;
+	ft_draw_ceiling(data);
+	ft_draw_floor(data);
+	while (i < NUM_RAYS)
+	{
+		texture = ft_choose_texture(&data->rays[i], &data->cub);
+		ft_init_cast(data, &data->rays[i], &p, &texture);
+		while (p.y < p.bottom_wall.y)
+		{
+			p.dist_top = p.y + (p.wall_strip_height / 2) - (WIN_HEIGHT / 2);
+			p.offset[1] = p.dist_top * ((float)texture.w / p.wall_strip_height);
+			texture.texel = texture.addr + (p.offset[1] * texture.line_length + p.offset[0] * (texture.bpp / 8));
+			ft_my_mlx_pixel_put(&data->mlx, i, p.y, *(int *)texture.texel);
+			p.y++;
+		}
+		i ++;
+	}
+}

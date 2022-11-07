@@ -24,4 +24,5 @@ void	ft_init_mlx(t_data *data)
 	data->mlx.mlx_ptr = mlx_init();
 	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	data->mlx.img_ptr = NULL;
+	/* ft_init_texture(data, &data->cub); */
 }

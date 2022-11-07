@@ -105,6 +105,19 @@ typedef enum e_map
  ** =========[ Struct ]============
  */
 
+typedef struct s_text
+{
+	void	*img;
+	char	*addr;
+	char	*texel;
+	int		bpp;
+	int		endian;
+	int		line_length;
+	int		w;
+	int		h;
+	char	*path;
+}	t_text;
+
 typedef struct s_cub
 {
 	const char		**specs;
@@ -113,6 +126,7 @@ typedef struct s_cub
 	int				**map;
 	unsigned long	f_color_hex;
 	unsigned long	c_color_hex;
+	t_text			texture[4];
 	int				n_texture_fd;
 	int				s_texture_fd;
 	int				w_texture_fd;
@@ -129,17 +143,6 @@ typedef struct s_mlx
 	int		endian;
 	int		line_length;
 }	t_mlx;
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		endian;
-	int		line_length;
-	int		width;
-	char	*path;
-}	t_img;
 
 typedef struct s_point
 {
@@ -164,6 +167,19 @@ typedef struct s_player
 	float	walk_speed;
 	float	turn_speed;
 }	t_player;
+
+typedef	struct s_proj
+{
+	int		y;
+	int		offset[2];
+	int		dist_top;
+	float	wall_strip_height;
+	float	dist_proj_plane;
+	float	proj_wall_height;
+	float	perpendicular_dist;
+	t_point	top_wall;
+	t_point	bottom_wall;
+}	t_proj;
 
 typedef struct s_ray
 {
@@ -267,6 +283,7 @@ int				ft_is_wall(t_data *data, float x, float y);
  */
 
 void			ft_3d_projection(t_data *data);
+void			ft_init_texture(t_data *data, t_cub *cub);
 
 /*
  ** rays.c
@@ -317,7 +334,7 @@ int				ft_waiting_event(t_data *data);
 
 void		ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 void			ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
-/* void		ft_draw_rect(t_data *data, t_point start, int width, int height); */
+void		ft_draw_rect(t_data *data, t_point start, int width, int height);
 /* void		ft_draw_mini_map(t_data *data); */
 /* void		ft_draw_grid(t_data *data); */
 /* void		ft_draw_rays(t_data *data); */

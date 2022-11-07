@@ -24,8 +24,9 @@ int	main(int ac, char **argv)
 	if (ac == 2)
 	{
 		ft_check_arg (argv[1]);
-		ft_init_cub (&data.cub, ft_load (argv[1]));
 		ft_init_mlx(&data);
+		ft_init_cub (&data.cub, ft_load (argv[1]));
+		ft_init_texture(&data, &data.cub);
 		ft_init_player(&data);
 		ft_init_rays(&data);
 		ft_render(&data);

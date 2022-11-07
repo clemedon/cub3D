@@ -1,10 +1,10 @@
-F 220,100,0
-C 225,200,255
+F 80,84,92
+C 117,164,240
 
-NO resources/brickov.xpm
-SO resources/walkstone.xpm
-WE resources/leavest.xpm
-EA resources/coal.xpm
+NO ./Makefile
+SO ./Makefile
+WE ./Makefile
+EA ./Makefile
 
 
 11111111111111111111
