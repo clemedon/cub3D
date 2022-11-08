@@ -34,6 +34,9 @@ Example: `chore: Update issues`
 # ――――――――→ cvidon ←――――――――
 
 refactor: Cleanup functions name
+- texture_fd -> texture_path
+- space_paren
+- replace t_bool with t_exit so I can return errno or 1 at error and 0 success.
 
 feat: Add parsing
 
