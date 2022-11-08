@@ -8,10 +8,10 @@ static float	ft_normalize_angle(float angle)
 	return (angle);
 }
 
-static float	ft_dist(float player_x, float player_y, float hit_x, float hit_y)
+static float	ft_dist(float p_x, float p_y, float hit_x, float hit_y)
 {
-	return (sqrt((hit_x - player_x) * (hit_x - player_x)
-			+ (hit_y - player_y) * (hit_y - player_y)));
+	return (sqrt((hit_x - p_x) * (hit_x - p_x)
+			+ (hit_y - p_y) * (hit_y - p_y)));
 }
 
 static void	ft_get_ray_orientation(t_cast *c, float ray_angle)
@@ -184,15 +184,12 @@ void	ft_cast_all_rays(t_data *data)
 	float	ray_angle;
 	int		ray_id;
 
-	/* ray_angle = data->player.rotation_angle - (FOV / 2); */
 	ray_id = 0;
 	while (ray_id < NUM_RAYS)
 	{
-		ray_angle = data->player.rotation_angle 
-			+ atan((ray_id - NUM_RAYS / 2) 
-			/ ((WIN_WIDTH / 2) / tan(FOV / 2)));
+		ray_angle = data->player.rotation_angle
+			+ atan((ray_id - NUM_RAYS / 2) / ((WIN_WIDTH / 2) / tan(FOV / 2)));
 		ft_cast_ray(data, ray_angle, &data->rays[ray_id]);
-		/* ray_angle += FOV / NUM_RAYS; */
 		ray_id ++;
 	}
 }

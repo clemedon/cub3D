@@ -2,7 +2,7 @@
 
 void	ft_draw_ceiling(t_data *data)
 {
-	t_point ceiling;
+	t_point	ceiling;
 
 	ceiling.x = 0;
 	ceiling.y = 0;
@@ -22,9 +22,11 @@ void	ft_draw_floor(t_data *data)
 
 void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)
 {
-	p->perpendicular_dist = ray->distance * cos(ray->ray_angle - data->player.rotation_angle);
+	p->perpendicular_dist = ray->distance
+		* cos(ray->ray_angle - data->player.rotation_angle);
 	p->dist_proj_plane = (WIN_WIDTH / 2) / tan(FOV / 2);
-	p->proj_wall_height = (TILE_SIZE / p->perpendicular_dist) * p->dist_proj_plane;
+	p->proj_wall_height = (TILE_SIZE / p->perpendicular_dist)
+		* p->dist_proj_plane;
 	p->wall_strip_height = (int)p->proj_wall_height;
 	p->top_wall.y = (WIN_HEIGHT / 2) - (p->wall_strip_height / 2);
 	if (p->top_wall.y < 0)
@@ -44,7 +46,7 @@ t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
 	if (ray->was_hit_vertical && ray->ray_facing_right)
 		return (cub->texture[EA]);
 	else if (ray->was_hit_vertical && ray->ray_facing_left)
-		return (cub->texture[WE]);			
+		return (cub->texture[WE]);
 	else if (!ray->was_hit_vertical && ray->ray_facing_up)
 		return (cub->texture[NO]);
 	else
@@ -54,7 +56,7 @@ t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
 void	ft_init_texture(t_data *data, t_cub *cub)
 {
 	int		i;
-	
+
 	cub->texture[EA].path = cub->e_texture;
 	cub->texture[WE].path = cub->w_texture;
 	cub->texture[SO].path = cub->s_texture;
@@ -66,7 +68,7 @@ void	ft_init_texture(t_data *data, t_cub *cub)
 				cub->texture[i].path,
 				&cub->texture[i].w,
 				&cub->texture[i].h);
-		cub->texture[i].addr =  mlx_get_data_addr(cub->texture[i].img,
+		cub->texture[i].addr = mlx_get_data_addr(cub->texture[i].img,
 				&cub->texture[i].bpp,
 				&cub->texture[i].line_length,
 				&cub->texture[i].endian);
@@ -74,13 +76,12 @@ void	ft_init_texture(t_data *data, t_cub *cub)
 	}
 }
 
-
 void	ft_3d_projection(t_data *data)
 {
 	int		i;
 	t_proj	p;
 	t_text	texture;
-	
+
 	i = 0;
 	ft_draw_ceiling(data);
 	ft_draw_floor(data);
@@ -92,7 +93,8 @@ void	ft_3d_projection(t_data *data)
 		{
 			p.dist_top = p.y + (p.wall_strip_height / 2) - (WIN_HEIGHT / 2);
 			p.offset[1] = p.dist_top * ((float)texture.w / p.wall_strip_height);
-			texture.texel = texture.addr + (p.offset[1] * texture.line_length + p.offset[0] * (texture.bpp / 8));
+			texture.texel = texture.addr + (p.offset[1]
+					* texture.line_length + p.offset[0] * (texture.bpp / 8));
 			ft_my_mlx_pixel_put(&data->mlx, i, p.y, *(int *)texture.texel);
 			p.y++;
 		}

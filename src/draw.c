@@ -19,9 +19,7 @@ void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
 	pixel = sqrt(delta.x * delta.x + delta.y * delta.y);
 	delta.x /= (float) pixel;
 	delta.y /= (float) pixel;
-	point.x = begin.x;
-	point.y = begin.y;
-	point.color = begin.color;
+	point = begin;
 	while (pixel)
 	{
 		if (point.x >= 0 && point.x < WIN_WIDTH
@@ -63,6 +61,7 @@ void	ft_draw_mini_map(t_data *data)
 	int		j;
 
 	p.y = 0;
+	p.color = data->cub.f_color_hex;
 	i = 0;
 	while (i < ROWS)
 	{
@@ -70,12 +69,12 @@ void	ft_draw_mini_map(t_data *data)
 		p.x = 0;
 		while (j < COLS)
 		{
-			if (data->cub.map[i][j] == 1)
-				p.color = 0xD4D2CD;
-			else
-				p.color = 0x262624;
-			if (p.x >= 0 && p.x < (COLS * TILE_SIZE)
-				&& p.y >= 0 && p.y < (ROWS * TILE_SIZE))
+			/* if (data->cub.map[i][j] == 1) */
+			/* 	p.color = 0xD4D2CD; */
+			/* else */
+			/* 	p.color = 0x262624; */
+			if (data->cub.map[i][j] == 1 && p.x >= 0 && p.x <= (COLS * TILE_SIZE)
+				&& p.y >= 0 && p.y <= (ROWS * TILE_SIZE))
 				ft_draw_rect(data, p, TILE_SIZE * MAP_SCALE,
 					TILE_SIZE * MAP_SCALE);
 			j ++;
@@ -155,7 +154,7 @@ void	ft_draw_player(t_data *data)
 	p_end.color = p_start.color;
 	temp = p_start;
 	temp.color = 0x00FF00;
-	ft_draw_line(&data->mlx, p_start, p_end);
+	/* ft_draw_line(&data->mlx, p_start, p_end); */
 	ft_draw_rect(data, temp, data->player.width, data->player.height);
 }
 

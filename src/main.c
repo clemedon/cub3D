@@ -30,9 +30,11 @@ int	main(int ac, char **argv)
 		ft_init_player(&data);
 		ft_init_rays(&data);
 		ft_render(&data);
-		mlx_loop_hook(data.mlx.mlx_ptr, ft_waiting_event, &data);
+		/* mlx_loop_hook(data.mlx.mlx_ptr, ft_waiting_event, &data); */
 		mlx_hook(data.mlx.win_ptr, 2, 1L << 0, (void *)ft_key_event, &data);
+		mlx_hook(data.mlx.win_ptr, 3, 1L << 1, (void *)ft_key_release, &data);
 		mlx_hook(data.mlx.win_ptr, 17, 1L << 17, (void *)ft_mouse_event, &data);
+		mlx_loop_hook(data.mlx.mlx_ptr, ft_move, &data);
 		mlx_loop(data.mlx.mlx_ptr);
 		ft_freetab ((void **)data.cub.specs);
 	}

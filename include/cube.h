@@ -321,6 +321,7 @@ void			ft_turn_left(t_data *data);
 void			ft_turn_right(t_data *data);
 void			ft_side_move(t_data *data);
 void			ft_move_player(t_data *data);
+int				ft_move(t_data *data);
 
 /*
  ** quit.c
@@ -333,6 +334,7 @@ void			ft_quit(t_data *data);
  */
 
 void			ft_key_event(int key, t_data *data);
+void			ft_key_release(int key, t_data *data);
 void			ft_mouse_event(t_data *data);
 int				ft_waiting_event(t_data *data);
 
@@ -341,7 +343,7 @@ int				ft_waiting_event(t_data *data);
  */
 
 void		ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-void			ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
+void		ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
 void		ft_draw_rect(t_data *data, t_point start, int width, int height);
 /* void		ft_draw_mini_map(t_data *data); */
 /* void		ft_draw_grid(t_data *data); */
