@@ -79,13 +79,13 @@ static t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 			return (FALSE);
 		}
 		if (i == 0)
-			cub->n_texture_fd = texture;
+			cub->n_texture_path = texture;
 		else if (i == 1)
-			cub->s_texture_fd = texture;
+			cub->s_texture_path = texture;
 		else if (i == 2)
-			cub->w_texture_fd = texture;
+			cub->w_texture_path = texture;
 		else if (i == 3)
-			cub->e_texture_fd = texture;
+			cub->e_texture_path = texture;
 		i++;
 	}
 	return (TRUE);

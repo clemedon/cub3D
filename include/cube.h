@@ -127,10 +127,10 @@ typedef struct s_cub
 	unsigned long	f_color_hex;
 	unsigned long	c_color_hex;
 	t_text			texture[4];
-	char			*n_texture_fd;
-	char			*s_texture_fd;
-	char			*w_texture_fd;
-	char			*e_texture_fd;
+	char			*n_texture_path;
+	char			*s_texture_path;
+	char			*w_texture_path;
+	char			*e_texture_path;
 }	t_cub;
 
 typedef struct s_mlx
