@@ -8,10 +8,10 @@
 
 void	ft_free_texture (t_cub *cub)
 {
-	ft_free (cub->n_texture_path);
-	ft_free (cub->s_texture_path);
-	ft_free (cub->w_texture_path);
-	ft_free (cub->e_texture_path);
+	ft_free (cub->n_texture);
+	ft_free (cub->s_texture);
+	ft_free (cub->w_texture);
+	ft_free (cub->e_texture);
 }
 
 /*
