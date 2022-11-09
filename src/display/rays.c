@@ -14,20 +14,20 @@ static float	ft_dist(float p_x, float p_y, float hit_x, float hit_y)
 			+ (hit_y - p_y) * (hit_y - p_y)));
 }
 
-static void	ft_get_ray_orientation(t_cast *c, float ray_angle)
+static void	ft_get_ray_orientation(t_cast *cast, float ray_angle)
 {
-	c->ray_facing_down = 0;
-	c->ray_facing_up = 0;
-	c->ray_facing_left = 0;
-	c->ray_facing_right = 0;
+	cast->ray_facing_down = 0;
+	cast->ray_facing_up = 0;
+	cast->ray_facing_left = 0;
+	cast->ray_facing_right = 0;
 	if (ray_angle > 0 && ray_angle < PI)
-		c->ray_facing_down = 1;
+		cast->ray_facing_down = 1;
 	else
-		c->ray_facing_up = !c->ray_facing_down;
+		cast->ray_facing_up = !cast->ray_facing_down;
 	if (ray_angle < 0.5 * PI || ray_angle > 1.5 * PI)
-		c->ray_facing_right = 1;
+		cast->ray_facing_right = 1;
 	else
-		c->ray_facing_left = !c->ray_facing_right;
+		cast->ray_facing_left = !cast->ray_facing_right;
 }
 
 static void	ft_horizontal_step(t_data *data, float ray_angle, t_cast *c)

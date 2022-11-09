@@ -50,22 +50,25 @@ INCS        := $(INCS) $(addsuffix include,$(dir $(LIBS_TARGET)))
 SRC_DIR     := src
 SRCS        := \
 			   main.c \
-			   load.c \
-			   init_cub.c \
-			   check_cub/check_cub.c \
-			   check_cub/check_col.c \
-			   check_cub/check_tex.c \
-			   check_cub/check_map.c \
-			   utils.c \
-			   event.c \
-			   init.c \
-			   init_player.c \
-			   draw.c \
-			   quit.c \
-			   player.c \
-			   projection.c \
-			   rays.c \
-			   wall.c
+			   set/set_cast.c \
+			   set/set_cub.c \
+			   set/set_mlx.c \
+			   set/set_player.c \
+			   set/set_rays.c \
+			   set/set_tex.c \
+			   read/load.c \
+			   read/check_cub.c \
+			   read/check_col.c \
+			   read/check_tex.c \
+			   read/check_map.c \
+			   hook/event.c \
+			   display/draw.c \
+			   display/player.c \
+			   display/projection.c \
+			   display/rays.c \
+			   display/wall.c \
+			   utils/quit.c \
+			   utils/utils.c
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 
 BUILD_DIR   := .build

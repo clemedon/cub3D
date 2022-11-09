@@ -6,7 +6,7 @@
  ** @param[in]  color a spec line corresponding to a color
  ** @return     The RGB values as a string or NULL.
  **
- ** @see ft_init_cub_color
+ ** @see ft_set_cub_color
  */
 
 static char	**ft_extract_rgb_val(const char *color)
@@ -25,14 +25,14 @@ static char	**ft_extract_rgb_val(const char *color)
 }
 
 /*
- ** @brief      Init cub colors
+ ** @brief      set cub colors
  **
  ** @param[out] cub the cub structure
  ** @param[in]  specs the cub specs
  ** @return     True or false.
  */
 
-static t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
+static t_bool	ft_set_cub_color(t_cub *cub, const char **specs)
 {
 	char	**rgb;
 
@@ -57,14 +57,14 @@ static t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
 }
 
 /*
- ** @brief      Init the cub map
+ ** @brief      Set the cub map
  **
  ** @param[out] cub the cub structure
  ** @param[in]  specs the cub specs
  ** @return     True or false.
  */
 
-static t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
+static t_bool	ft_set_cub_texture(t_cub *cub, const char **specs)
 {
 	char	*texture;
 	int		i;
@@ -101,7 +101,7 @@ static t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
  ** @param[in]  str an array of chars
  ** @return     The numerical id corresponding to the given char.
  **
- ** TODO init utils .c ?
+ ** TODO set utils .c ?
  */
 
 static int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
@@ -139,7 +139,7 @@ static int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
  ** @param[in]  height the map height
  ** @return     An integer version of the map
  **
- ** TODO init utils .c ?
+ ** TODO set utils .c ?
  */
 
 static int	**ft_map_to_int(const char **charmap, int width, int height)
@@ -168,16 +168,16 @@ static int	**ft_map_to_int(const char **charmap, int width, int height)
 }
 
 /*
- ** @brief      Init the cub map
+ ** @brief      Set the cub map
  **
  ** @param[out] cub the cub structure
  ** @param[in]  specs the cub specs
  **
- ** TODO init_map
+ ** TODO set_map
  ** starting with an emptyline is not legal?
  */
 
-static t_bool	ft_init_cub_map(t_cub *cub, const char **specs)
+static t_bool	ft_set_cub_map(t_cub *cub, const char **specs)
 {
 	while (ft_strchr(MAP_OUTER, **specs) == NULL || **specs == 0)
 		specs++;
@@ -190,13 +190,13 @@ static t_bool	ft_init_cub_map(t_cub *cub, const char **specs)
 }
 
 /*
- ** @brief      Init cub struct
+ ** @brief      Set cub struct
  **
  ** @param[out] cub the struct
  ** @param[in]  specs the data to fill cub with
  */
 
-void	ft_init_cub(t_cub *cub, const char **specs)
+void	ft_set_cub(t_cub *cub, const char **specs)
 {
 	cub->specs = specs;
 	if (!ft_check_cub (specs))
@@ -204,17 +204,17 @@ void	ft_init_cub(t_cub *cub, const char **specs)
 		ft_freetab ((void **)specs);
 		ft_exit_error (__func__, ER_SPECS);
 	}
-	if (!ft_init_cub_color (cub, specs))
+	if (!ft_set_cub_color (cub, specs))
 	{
 		ft_freetab ((void **)specs);
 		ft_exit_error (__func__, ER_SPECS);
 	}
-	if (!ft_init_cub_texture (cub, specs))
+	if (!ft_set_cub_texture (cub, specs))
 	{
 		ft_freetab ((void **)specs);
 		ft_exit_error (__func__, ER_SPECS);
 	}
-	if (!ft_init_cub_map (cub, specs))
+	if (!ft_set_cub_map (cub, specs))
 	{
 		ft_free_texture (cub);
 		ft_freetab ((void **)specs);

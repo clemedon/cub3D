@@ -36,7 +36,7 @@ static void	ft_get_player_orientation(t_data *data)
 		data->player.rotation_angle = PI;
 }
 
-void	ft_init_player(t_data *data)
+void	ft_set_player(t_data *data)
 {
 	ft_get_player_position(data);
 	data->player.dx = 0;
