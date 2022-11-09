@@ -61,6 +61,7 @@ SRCS        := \
 			   init.c \
 			   init_player.c \
 			   draw.c \
+			   draw_utils.c \
 			   quit.c \
 			   player.c \
 			   projection.c \
