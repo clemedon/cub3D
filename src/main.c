@@ -34,7 +34,8 @@ int	main(int ac, char **argv)
 		mlx_hook(data.mlx.win_ptr, 2, 1L << 0, (void *)ft_key_event, &data);
 		mlx_hook(data.mlx.win_ptr, 17, 1L << 17, (void *)ft_mouse_event, &data);
 		mlx_loop(data.mlx.mlx_ptr);
-		ft_freetab ((void **)data.cub.specs);
+		/* ft_freetab_size ((void**)data.cub.map, data.cub.height); */
+		/* ft_free_texture (&data.cub); */
 	}
 	else
 		ft_exit_error (NULL, ER_USAGE);
