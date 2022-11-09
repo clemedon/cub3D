@@ -42,13 +42,16 @@
 # define MOVE_RIGHT	97
 # define TURN_LEFT	65361
 # define TURN_RIGHT	65363
+# define MINIMAP	109
+# define RAY		114
+# define HELP		104
 
 /* Map constants */
 
 # define ROWS		13
 # define COLS		20
 # define TILE_SIZE	64
-# define MAP_SCALE	0.2
+# define MAP_SCALE	0.25
 
 /* Window dimensions */
 # define WIN_HEIGHT	(ROWS * TILE_SIZE)
@@ -59,12 +62,6 @@
 # define RIGHT		1
 # define BACK		-1
 # define FRONT		1
-
-/* Player position */
-/* # define N			2 */
-/* # define S			3 */
-/* # define E			4 */
-/* # define W			5 */
 
 /* Math constants */
 
@@ -128,6 +125,9 @@ typedef struct s_text
 
 typedef struct s_cub
 {
+	int				minimap;
+	int				ray;
+	int				help;
 	const char		**specs;
 	int				width;
 	int				height;
@@ -319,14 +319,20 @@ int				ft_waiting_event(t_data *data);
  ** draw.c
  */
 
-void		ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-void		ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
-void		ft_draw_rect(t_data *data, t_point start, int width, int height);
 /* void		ft_draw_mini_map(t_data *data); */
 /* void		ft_draw_grid(t_data *data); */
 /* void		ft_draw_rays(t_data *data); */
 /* void		ft_draw_player(t_data *data); */
 int				ft_render(t_data *data);
+
+/*
+ ** draw_utils.c
+ */
+
+void		ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void		ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
+void		ft_draw_rect(t_data *data, t_point start, int width, int height);
+void		ft_draw_circle(t_data *data, t_point center, double radius);
 
 /*
  ** init.c

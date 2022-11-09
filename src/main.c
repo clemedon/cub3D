@@ -23,6 +23,8 @@ int	main(int ac, char **argv)
 
 	if (ac == 2)
 	{
+		data.cub.minimap = -1;
+		data.cub.ray = -1;
 		ft_check_arg (argv[1]);
 		ft_init_cub (&data.cub, ft_load (argv[1]));
 		ft_init_mlx(&data);

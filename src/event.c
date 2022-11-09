@@ -16,6 +16,10 @@ void	ft_key_event(int key, t_data *data)
 		data->player.turn_direction = -1;
 	else if (key == TURN_RIGHT)
 		data->player.turn_direction = 1;
+	else if (key == MINIMAP)
+		data->cub.minimap *= -1;
+	else if (key == RAY)
+		data->cub.ray *= -1;
 }
 
 void	ft_key_release(int key, t_data *data)
