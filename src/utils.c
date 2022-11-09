@@ -1,6 +1,20 @@
 #include "cube.h"
 
 /*
+ ** @brief      Free textures.
+ **
+ ** @param[i/o] cub a struct that contains textures
+ */
+
+void	ft_free_texture (t_cub *cub)
+{
+	ft_free (cub->n_texture_path);
+	ft_free (cub->s_texture_path);
+	ft_free (cub->w_texture_path);
+	ft_free (cub->e_texture_path);
+}
+
+/*
  ** @brief      Create rgb value
  **
  ** @param[in]  r the red value

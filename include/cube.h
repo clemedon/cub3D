@@ -247,6 +247,7 @@ typedef struct s_data
  ** utils.c
  */
 
+void			ft_free_texture (t_cub *cub);
 unsigned long	ft_create_rgb(int r, int g, int b);
 void			ft_print_chartab(const char **tab); // XXX
 void			ft_print_inttab(int **tab, int width, int height); // XXX
@@ -261,24 +262,6 @@ t_bool			ft_str_onlywith(const char *str, const char *charset);
 char			*ft_replace_char(char *str, char find, char replace);
 int				ft_strtab_height(const char **tab);
 int				ft_strtab_width(const char **tab);
-
-/*
- ** check_cub/
- */
-
-/* t_bool		ft_check_map_enclosure(char **map, int width, int height); */
-/* t_bool		ft_check_map_limits(const char **map); */
-/* t_bool		ft_check_map_spawn(const char **map); */
-/* t_bool		ft_check_map_global(const char **map); */
-t_bool			ft_check_map(const char **specs);
-
-/* t_bool		ft_check_tex_value(const char *specs); */
-t_bool			ft_check_tex(const char **specs);
-
-/* t_bool		ft_check_col_value(const char *specs); */
-t_bool			ft_check_col(const char **specs);
-
-t_bool			ft_check_cub(const char **specs);
 
 /*
  ** wall.c
@@ -364,12 +347,31 @@ void			ft_init_player(t_data *data);
  ** init_cub.c
  */
 
+/* char		**ft_extract_rgb_val(char *color) */
 /* t_bool	ft_init_cub_color(t_cub *cub, const char **specs); */
 /* t_bool	ft_init_cub_texture(t_cub *cub, const char **specs); */
 /* int		*ft_maprow_to_int(const char *maprow, int *introw, int width); */
 /* int		**ft_map_to_int(const char **charmap, int width, int height); */
 /* t_bool	ft_init_cub_map(t_cub *cub, const char **specs); */
 void			ft_init_cub(t_cub *cub, const char **specs);
+
+/*
+ ** check_cub/
+ */
+
+/* t_bool		ft_check_map_enclosure(char **map, int width, int height); */
+/* t_bool		ft_check_map_limits(const char **map); */
+/* t_bool		ft_check_map_spawn(const char **map); */
+/* t_bool		ft_check_map_global(const char **map); */
+t_bool			ft_check_map(const char **specs);
+
+/* t_bool		ft_check_tex_value(const char *specs); */
+t_bool			ft_check_tex(const char **specs);
+
+/* t_bool		ft_check_col_value(const char *specs); */
+t_bool			ft_check_col(const char **specs);
+
+t_bool			ft_check_cub(const char **specs);
 
 /*
  ** load.c

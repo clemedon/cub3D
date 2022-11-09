@@ -11,6 +11,7 @@
  ** Map     specs has to come 3rd
  **
  ** @param[in]  specs the cub specificities.
+ ** @return     True or false.
  */
 
 t_bool	ft_check_cub(const char **specs)

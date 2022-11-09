@@ -6,5 +6,6 @@ void	ft_quit(t_data *data)
 	mlx_destroy_window(data->mlx.mlx_ptr, data->mlx.win_ptr);
 	mlx_destroy_display(data->mlx.mlx_ptr); // OS
 	free(data->mlx.mlx_ptr);
+	ft_free_texture (&data->cub);
 	exit(0);
 }
