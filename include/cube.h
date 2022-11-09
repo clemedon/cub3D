@@ -313,15 +313,9 @@ void			ft_cast_all_rays(t_data *data);
  ** player.c
  */
 
-void			ft_move_up(t_data *data);
-void			ft_move_down(t_data *data);
-void			ft_move_left(t_data *data);
-void			ft_move_right(t_data *data);
-void			ft_turn_left(t_data *data);
-void			ft_turn_right(t_data *data);
-void			ft_side_move(t_data *data);
-void			ft_move_player(t_data *data);
-int				ft_move(t_data *data);
+/* void			ft_side_move(t_data *data, t_point *p); */
+/* void			ft_oblique_move(t_data *data, t_point *p); */
+int				ft_move_player(t_data *data);
 
 /*
  ** quit.c
