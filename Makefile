@@ -73,7 +73,7 @@ OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS        := $(OBJS:.o=.d)
 
 CC          := clang
-CFLAGS      := $(CFLAGS)   -Wall -Wextra -Werror
+CFLAGS      := $(CFLAGS)   -Wall -Wextra -Werror -g
 CPPFLAGS    := $(CPPFLAGS) $(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS     := $(LDFLAGS)  $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS      := $(LDLIBS)   $(addprefix -l,$(LIBS))
@@ -90,7 +90,7 @@ LDLIBS      := $(LDLIBS)   $(addprefix -l,$(LIBS))
 RM          := rm -f
 MAKE        := $(MAKE) --jobs --silent --no-print-directory
 DIR_DUP     = mkdir -p $(@D)
-VALGRIND    := valgrind -q  --dsymutil=yes --leak-check=yes --show-leak-kinds=all
+VALGRIND    := valgrind -q  --dsymutil=yes --leak-check=yes --show-leak-kinds=all --track-fds=yes
 ERR_MUTE	:= 2>/dev/null
 
 #------------------------------------------------#

@@ -40,7 +40,9 @@ static t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
 		specs++;
 	rgb = ft_extract_rgb_val (*specs + 1);
 	if (!rgb)
+	{
 		return (FALSE);
+	}
 	cub->f_color_hex = ft_create_rgb
 		(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
 	ft_freetab ((void **)rgb);
@@ -159,7 +161,7 @@ static int	**ft_map_to_int(const char **charmap, int width, int height)
 			ft_freetab ((void **)intmap);
 			return (NULL);
 		}
-		intmap[y] = ft_maprow_to_int(charmap[y], introw, width);
+		intmap[y] = ft_maprow_to_int (charmap[y], introw, width);
 		y++;
 	}
 	return (intmap);
@@ -204,7 +206,6 @@ void	ft_init_cub(t_cub *cub, const char **specs)
 	}
 	if (!ft_init_cub_color (cub, specs))
 	{
-		dprintf (2, "A\n");
 		ft_freetab ((void **)specs);
 		ft_exit_error (__func__, ER_SPECS);
 	}
