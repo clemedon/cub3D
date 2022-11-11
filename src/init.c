@@ -19,10 +19,20 @@ void	ft_init_rays(t_data *data)
 	}
 }
 
+//TODO
 void	ft_init_mlx(t_data *data)
 {
 	data->mlx.mlx_ptr = mlx_init();
+	if (!data->mlx.mlx_ptr)
+	{
+		/* free... */
+		exit(EXIT_FAILURE);
+	}
 	data->mlx.win_ptr = mlx_new_window(data->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "cub3D");
+	if (!data->mlx.win_ptr)
+	{
+		/* free ... */ 
+		exit(EXIT_FAILURE);
+	}
 	data->mlx.img_ptr = NULL;
-	/* ft_init_texture(data, &data->cub); */
 }

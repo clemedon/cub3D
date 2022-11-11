@@ -53,6 +53,7 @@ t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
 		return (cub->texture[SO]);
 }
 
+//TODO
 void	ft_init_texture(t_data *data, t_cub *cub)
 {
 	int		i;
@@ -68,10 +69,20 @@ void	ft_init_texture(t_data *data, t_cub *cub)
 				cub->texture[i].path,
 				&cub->texture[i].w,
 				&cub->texture[i].h);
+		if (!cub->texture[i].img)
+		{
+			/* free... */
+			exit(EXIT_FAILURE);
+		}
 		cub->texture[i].addr = mlx_get_data_addr(cub->texture[i].img,
 				&cub->texture[i].bpp,
 				&cub->texture[i].line_length,
 				&cub->texture[i].endian);
+		if (!cub->texture[i].addr)
+		{
+			/* free... */
+			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
 }

@@ -58,13 +58,24 @@ void	ft_draw_rays(t_data *data)
 	}
 }
 
+//TODO
 int	ft_render(t_data *data)
 {
 	if (data->mlx.img_ptr != NULL)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img_ptr);
 	data->mlx.img_ptr = mlx_new_image(data->mlx.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->mlx.img_ptr)
+	{
+		/* free.... */
+		exit(EXIT_FAILURE);
+	}
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img_ptr,
 			&data->mlx.bpp, &data->mlx.line_length, &data->mlx.endian);
+	if (!data->mlx.img_ptr)
+	{
+		/* free.... */
+		exit(EXIT_FAILURE);
+	}
 	ft_cast_all_rays(data);
 	ft_3d_projection(data);
 	if (data->cub.minimap == 1)
