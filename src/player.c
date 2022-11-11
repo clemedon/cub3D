@@ -20,7 +20,7 @@ void	ft_oblique_move(t_data *data, t_point *p)
 			* cos(data->player.rotation_angle - PI / 4);
 		p->y = data->player.y + step
 			* sin(data->player.rotation_angle - PI / 4);
-	}	
+	}
 	else if (data->player.side_direction == -1)
 	{
 		p->x = data->player.x + step

@@ -17,28 +17,27 @@ static void	ft_check_arg(const char *arg)
 		ft_exit_error (NULL, ER_USAGE);
 }
 
+
 int	main(int ac, char **argv)
 {
 	t_data	data;
+	const char	**specs;
 
 	if (ac == 2)
 	{
-		data.cub.minimap = -1; //TODO
-		data.cub.ray = -1; //TODO
 		ft_check_arg (argv[1]);
-		ft_init_cub (&data.cub, ft_load (argv[1]));
-		ft_init_mlx(&data);
-		ft_init_texture(&data, &data.cub);
-		ft_init_player(&data);
-		ft_init_rays(&data);
+		specs = ft_load_cub (argv[1]);
+		if (!ft_check_cub (specs))
+			return (FALSE);
+		if (!ft_init (&data, specs))
+			return (EXIT_FAILURE);
+		ft_freetab ((void **)specs);
 		ft_render(&data);
 		mlx_hook(data.mlx.win_ptr, 2, 1L << 0, (void *)ft_key_event, &data);
 		mlx_hook(data.mlx.win_ptr, 3, 1L << 1, (void *)ft_key_release, &data);
 		mlx_hook(data.mlx.win_ptr, 17, 1L << 17, (void *)ft_mouse_event, &data);
 		mlx_loop_hook(data.mlx.mlx_ptr, ft_move_player, &data);
 		mlx_loop(data.mlx.mlx_ptr);
-		/* ft_freetab_size ((void**)data.cub.map, data.cub.height); */
-		/* ft_free_texture (&data.cub); */
 	}
 	else
 		ft_exit_error (NULL, ER_USAGE);

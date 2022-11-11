@@ -127,7 +127,6 @@ typedef struct s_cub
 {
 	int				minimap;
 	int				ray;
-	int				help;
 	const char		**specs;
 	int				width;
 	int				height;
@@ -247,7 +246,6 @@ typedef struct s_data
  ** utils.c
  */
 
-void			ft_free_texture (t_cub *cub);
 unsigned long	ft_create_rgb(int r, int g, int b);
 void			ft_print_chartab(const char **tab); // XXX
 void			ft_print_inttab(int **tab, int width, int height); // XXX
@@ -273,8 +271,11 @@ int				ft_is_wall(t_data *data, float x, float y);
  ** projection.c
  */
 
-void			ft_3d_projection(t_data *data);
-void			ft_init_texture(t_data *data, t_cub *cub);
+/* static void ft_draw_ceiling(t_data *data) */
+/* static void ft_draw_floor(t_data *data) */
+/* static void ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture) */
+/* static t_text   ft_choose_texture(t_ray *ray, t_cub *cub) */
+void    ft_3d_projection(t_data *data);
 
 /*
  ** rays.c
@@ -313,7 +314,6 @@ void			ft_quit(t_data *data);
 void			ft_key_event(int key, t_data *data);
 void			ft_key_release(int key, t_data *data);
 void			ft_mouse_event(t_data *data);
-int				ft_waiting_event(t_data *data);
 
 /*
  ** draw.c
@@ -335,31 +335,64 @@ void		ft_draw_rect(t_data *data, t_point start, int width, int height);
 void		ft_draw_circle(t_data *data, t_point center, double radius);
 
 /*
- ** init.c
+ ** init_rays.c
  */
 
-void			ft_init_rays(t_data *data);
-void			ft_init_mlx(t_data *data);
+void		ft_init_rays(t_data *data);
 
 /*
  ** init_player.c
  */
 
-/* void		ft_get_player_position(t_data *data); */
-/* void		ft_get_player_orientation(t_data *data); */
-void			ft_init_player(t_data *data);
+/* void ft_get_player_position(t_data *data) */
+/* void ft_get_player_orientation(t_data *data) */
+void		ft_init_player(t_data *data);
+
+/*
+ ** init_texture.c
+ */
+
+void    		ft_free_texture(t_cub *cub, t_mlx *mlx);
+/* void    ft_pre_init_texture(t_cub *cub) */
+t_bool			ft_init_texture(t_cub *cub, t_mlx *mlx);
+
+/*
+ ** init_mlx.c
+ */
+
+void			ft_free_mlx(t_mlx *mlx);
+/* void			ft_pre_init_mlx(t_mlx *mlx); */
+int				ft_init_mlx(t_mlx *mlx);
+
+/*
+ ** init_cub_attr.c
+ */
+
+/* static char **ft_extract_rgb_val(const char *color) */
+t_bool			ft_init_cub_color(t_cub *cub, const char **specs);
+t_bool			ft_init_cub_texture(t_cub *cub, const char **specs);
+
+/*
+ ** init_cub_map.c
+ */
+
+/* int  *ft_maprow_to_int(const char *maprow, int *introw, int width) */
+/* int  **ft_map_to_int(const char **charmap, int width, int height) */
+t_bool			ft_init_cub_map(t_cub *cub, const char **specs);
 
 /*
  ** init_cub.c
  */
 
-/* char		**ft_extract_rgb_val(char *color) */
-/* t_bool	ft_init_cub_color(t_cub *cub, const char **specs); */
-/* t_bool	ft_init_cub_texture(t_cub *cub, const char **specs); */
-/* int		*ft_maprow_to_int(const char *maprow, int *introw, int width); */
-/* int		**ft_map_to_int(const char **charmap, int width, int height); */
-/* t_bool	ft_init_cub_map(t_cub *cub, const char **specs); */
-void			ft_init_cub(t_cub *cub, const char **specs);
+void			ft_free_cub (t_cub *cub);
+/* void		ft_pre_init_cub(t_cub *cub) */
+t_bool			ft_init_cub(t_cub *cub, const char **specs);
+
+/*
+ ** init.c
+ */
+
+t_bool			ft_init (t_data *data, const char **specs);
 
 /*
  ** check_cub/
@@ -384,7 +417,7 @@ t_bool			ft_check_cub(const char **specs);
  */
 
 /* int			ft_line_counter(char *file); */
-const char		**ft_load(char *file);
+const char		**ft_load_cub(char *file);
 
 /*
  ** main.c

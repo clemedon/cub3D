@@ -1,35 +1,6 @@
 #include "cube.h"
 
 /*
- ** @brief      Free textures.
- **
- ** @param[i/o] cub a struct that contains textures
- */
-
-void	ft_free_texture (t_cub *cub)
-{
-	int	i;
-
-	i = 0;
-	ft_free (cub->n_texture);
-	ft_free (cub->s_texture);
-	ft_free (cub->w_texture);
-	ft_free (cub->e_texture);
-	/* while (i < 4) */
-	/* { */
-	/* 	if (cub->texture[i].img) */
-	/* 		mlx_destroy_image(data->mlx.mlx_ptr, cub->texture[i].img); */
-	/* 	i ++; */
-	/* } */
-	/* while (i < 4) */
-	/* { */
-	/* 	if (cub->texture[i].img) */
-	/* 		free(cub->texture[i].img); */
-	/* 	i ++; */
-	/* } */
-}
-
-/*
  ** @brief      Create rgb value
  **
  ** @param[in]  r the red value

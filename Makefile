@@ -28,8 +28,8 @@ NAME        := cub3D
 ifeq ($(shell uname -s), Darwin)
 	LIBS        := ft mlx m
 	LIBS_TARGET := \
-		lib/libft/libft.a \
-		lib/minilibx-darwin/libmlx.a
+				   lib/libft/libft.a \
+				   lib/minilibx-darwin/libmlx.a
 	INCS      := /opt/X11/include
 	CFLAGS    := -D OSTYPE=darwin
 	LDLIBS    := -framework OpenGL -framework AppKit
@@ -39,8 +39,8 @@ endif
 ifeq ($(shell uname -s), Linux)
 	LIBS        := ft mlx m X11 Xext
 	LIBS_TARGET := \
-		lib/libft/libft.a \
-		lib/minilibx-linux/libmlx.a
+				   lib/libft/libft.a \
+				   lib/minilibx-linux/libmlx.a
 	CFLAGS    := -D OSTYPE=linux
 endif
 
@@ -51,15 +51,21 @@ SRC_DIR     := src
 SRCS        := \
 			   main.c \
 			   load.c \
-			   init_cub.c \
+			   init/init.c \
+			   init/init_cast.c \
+			   init/init_cub.c \
+			   init/init_cub_attr.c \
+			   init/init_cub_map.c \
+			   init/init_mlx.c \
+			   init/init_player.c \
+			   init/init_rays.c \
+			   init/init_texture.c \
 			   check_cub/check_cub.c \
 			   check_cub/check_col.c \
 			   check_cub/check_tex.c \
 			   check_cub/check_map.c \
 			   utils.c \
 			   event.c \
-			   init.c \
-			   init_player.c \
 			   draw.c \
 			   draw_utils.c \
 			   quit.c \

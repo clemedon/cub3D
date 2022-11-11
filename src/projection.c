@@ -1,6 +1,6 @@
 #include "cube.h"
 
-void	ft_draw_ceiling(t_data *data)
+static void	ft_draw_ceiling(t_data *data)
 {
 	t_point	ceiling;
 
@@ -10,7 +10,7 @@ void	ft_draw_ceiling(t_data *data)
 	ft_draw_rect(data, ceiling, WIN_WIDTH, WIN_HEIGHT / 2);
 }
 
-void	ft_draw_floor(t_data *data)
+static void	ft_draw_floor(t_data *data)
 {
 	t_point	floor;
 
@@ -20,7 +20,7 @@ void	ft_draw_floor(t_data *data)
 	ft_draw_rect(data, floor, WIN_WIDTH, WIN_HEIGHT / 2);
 }
 
-void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)
+static void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)
 {
 	p->perpendicular_dist = ray->distance
 		* cos(ray->ray_angle - data->player.rotation_angle);
@@ -41,7 +41,7 @@ void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)
 		p->bottom_wall.y = WIN_HEIGHT;
 }
 
-t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
+static t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
 {
 	if (ray->was_hit_vertical && ray->ray_facing_right)
 		return (cub->texture[EA]);
@@ -51,40 +51,6 @@ t_text	ft_choose_texture(t_ray *ray, t_cub *cub)
 		return (cub->texture[NO]);
 	else
 		return (cub->texture[SO]);
-}
-
-//TODO
-void	ft_init_texture(t_data *data, t_cub *cub)
-{
-	int		i;
-
-	cub->texture[EA].path = cub->e_texture;
-	cub->texture[WE].path = cub->w_texture;
-	cub->texture[SO].path = cub->s_texture;
-	cub->texture[NO].path = cub->n_texture;
-	i = 0;
-	while (i < 4)
-	{
-		cub->texture[i].img = mlx_xpm_file_to_image(data->mlx.mlx_ptr,
-				cub->texture[i].path,
-				&cub->texture[i].w,
-				&cub->texture[i].h);
-		if (!cub->texture[i].img)
-		{
-			/* free... */
-			exit(EXIT_FAILURE);
-		}
-		cub->texture[i].addr = mlx_get_data_addr(cub->texture[i].img,
-				&cub->texture[i].bpp,
-				&cub->texture[i].line_length,
-				&cub->texture[i].endian);
-		if (!cub->texture[i].addr)
-		{
-			/* free... */
-			exit(EXIT_FAILURE);
-		}
-		i++;
-	}
 }
 
 void	ft_3d_projection(t_data *data)

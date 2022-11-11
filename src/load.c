@@ -43,7 +43,7 @@ static int	ft_line_counter(char *file)
  ** @return     An array of strings corresponding to each lines
  */
 
-const char	**ft_load(char *file)
+const char	**ft_load_cub(char *file)
 {
 	int			fd;
 	char		*line;
