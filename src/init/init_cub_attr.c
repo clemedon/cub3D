@@ -40,9 +40,7 @@ t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
 		specs++;
 	rgb = ft_extract_rgb_val (*specs + 1);
 	if (!rgb)
-	{
 		return (FALSE);
-	}
 	cub->f_color_hex = ft_create_rgb
 		(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
 	ft_freetab ((void **)rgb);
@@ -76,10 +74,7 @@ t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 	{
 		texture = ft_strtrim (&specs[i][2], " ");
 		if (!texture)
-		{
-			ft_free_cub (cub);
 			return (FALSE);
-		}
 		if (i == 0)
 			cub->n_texture = texture;
 		if (i == 1)

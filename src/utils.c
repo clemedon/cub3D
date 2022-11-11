@@ -133,6 +133,7 @@ char	**ft_gridify(const char **tab, int width, int height)
 		{
 			grid[y] = 0;
 			ft_freetab ((void **)grid);
+		ft_freetab ((void **)tab);
 			return (NULL);
 		}
 		ft_memset ((void *)grid[y], ' ', width);

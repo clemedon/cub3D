@@ -57,6 +57,7 @@ int	ft_move_player(t_data *data)
 		data->player.x = p.x;
 		data->player.y = p.y;
 	}
-	ft_render(data);
-	return (0);
+	if (!ft_render(data))
+		ft_quit (data);
+	return (TRUE);
 }

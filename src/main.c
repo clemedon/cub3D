@@ -28,11 +28,9 @@ int	main(int ac, char **argv)
 		ft_check_arg (argv[1]);
 		specs = ft_load_cub (argv[1]);
 		if (!ft_check_cub (specs))
-			return (FALSE);
+			return (EXIT_FAILURE);
 		if (!ft_init (&data, specs))
 			return (EXIT_FAILURE);
-		ft_freetab ((void **)specs);
-		ft_render(&data);
 		mlx_hook(data.mlx.win_ptr, 2, 1L << 0, (void *)ft_key_event, &data);
 		mlx_hook(data.mlx.win_ptr, 3, 1L << 1, (void *)ft_key_release, &data);
 		mlx_hook(data.mlx.win_ptr, 17, 1L << 17, (void *)ft_mouse_event, &data);

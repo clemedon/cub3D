@@ -6,7 +6,10 @@ void ft_free_cub (t_cub *cub)
 	ft_free (cub->s_texture);
 	ft_free (cub->w_texture);
 	ft_free (cub->e_texture);
-	ft_freetab_size ((void**)cub->map, cub->height);
+	if (cub->specs)
+		ft_freetab ((void **)cub->specs);
+	if (cub->map)
+		ft_freetab_size ((void**)cub->map, cub->height);
 }
 
 static void	ft_pre_init_cub(t_cub *cub)

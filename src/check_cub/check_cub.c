@@ -23,15 +23,13 @@ t_bool	ft_check_cub(const char **specs)
 	height = 0;
 	while (specs[height])
 		height++;
-	if (height < 11)
-		return (FALSE);
-	if (**specs == COL_IDS[0])
+	if (**specs == COL_IDS[0] && height >= 11)
 	{
 		r *= ft_check_col (specs);
 		r *= ft_check_tex (specs + COL_NUM);
 		r *= ft_check_map (specs + COL_NUM);
 	}
-	else if (**specs == TEX_IDS[0])
+	else if (**specs == TEX_IDS[0] && height >= 11)
 	{
 		r *= ft_check_tex (specs);
 		r *= ft_check_col (specs + TEX_NUM);
@@ -39,5 +37,7 @@ t_bool	ft_check_cub(const char **specs)
 	}
 	else
 		return (FALSE);
+	if (!r)
+		ft_freetab ((void **)specs);
 	return (r);
 }
