@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:18:53 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 11:18:54 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:19:55 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ void	ft_init_player(t_data *data)
 	data->player.walk_direction = 0;
 	data->player.side_direction = 0;
 	data->player.turn_direction = 0;
-	data->player.walk_speed = 0.1;
-	data->player.turn_speed = 0.08;
+	data->player.walk_speed = WALK_SPEED;
+	data->player.turn_speed = TURN_SPEED;
 }

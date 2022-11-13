@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:20:38 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 11:20:41 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/13 15:16:09 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_side_move(t_data *data, t_point *p)
 {
 	float	step;
 
-	step = data->player.side_direction * 5;
+	step = data->player.side_direction * data->player.walk_speed;
 	p->x = data->player.x + step * sin(data->player.rotation_angle);
 	p->y = data->player.y - step * cos(data->player.rotation_angle);
 }
@@ -25,7 +25,7 @@ void	ft_oblique_move(t_data *data, t_point *p)
 {
 	float	step;
 
-	step = data->player.walk_direction * 5;
+	step = data->player.walk_direction * data->player.walk_speed;
 	if (data->player.side_direction == 1)
 	{
 		p->x = data->player.x + step
@@ -46,7 +46,7 @@ void	ft_straight_move(t_data *data, t_point *p)
 {
 	float	step;
 
-	step = data->player.walk_direction * 5;
+	step = data->player.walk_direction * data->player.walk_speed;
 	p->x = data->player.x + cos(data->player.rotation_angle) * step;
 	p->y = data->player.y + sin(data->player.rotation_angle) * step;
 }

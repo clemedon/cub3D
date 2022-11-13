@@ -50,25 +50,29 @@
 
 # define ROWS		13
 # define COLS		20
-# define TILE_SIZE	128
+# define TILE_SIZE	64
 # define MAP_SCALE	0.25
 
 /* Window dimensions */
 # define WIN_HEIGHT	800
 # define WIN_WIDTH	1200
 
-/* Player direction */
+/* Player constants */
 # define LEFT		-1
 # define RIGHT		1
 # define BACK		-1
 # define FRONT		1
+# define TURN_SPEED	0.08
+# define WALK_SPEED	10
+
 
 /* Math constants */
 
 # define PI 		M_PI
-# define TWO_PI 	M_PI * 2
+# define TWO_PI 	6.28318
 
-# define FOV 		(60 * (PI / 180))
+/* # define FOV 		(60 * (PI / 180)) */
+# define FOV 		1.047196667	
 # define NUM_RAYS	WIN_WIDTH
 
 /*

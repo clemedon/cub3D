@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:31:42 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 11:33:41 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/13 14:47:15 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	ft_is_wall(t_data *data, float x, float y)
 		return (1);
 	map_x = floor(x / TILE_SIZE);
 	map_y = floor(y / TILE_SIZE);
+	if (map_x > data->cub.width - 1)
+		return (1);
+	if (map_y > data->cub.height - 1)
+		return (1);
 	return (data->cub.map[(int)map_y][(int)map_x] == 1);
 }
 
