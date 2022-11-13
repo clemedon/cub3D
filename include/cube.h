@@ -48,8 +48,6 @@
 
 /* Map constants */
 
-# define ROWS		13
-# define COLS		20
 # define TILE_SIZE	64
 # define MAP_SCALE	0.25
 
@@ -65,13 +63,11 @@
 # define TURN_SPEED	0.08
 # define WALK_SPEED	10
 
-
 /* Math constants */
 
-# define PI 		M_PI
+# define PI 		3.14159
 # define TWO_PI 	6.28318
 
-/* # define FOV 		(60 * (PI / 180)) */
 # define FOV 		1.047196667	
 # define NUM_RAYS	WIN_WIDTH
 
