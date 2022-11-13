@@ -1,6 +1,6 @@
-NO ../../textures/forbidden_texture.xpm
-EA ../../textures/WALL2.xpm
-SO ../../textures/WALL4.xpm
+NO resources/brickov.xpm
+SO resources/brickov.xpm
+WE resources/brickov.xpm
 
  F       150,150,150
 C 70,70,70

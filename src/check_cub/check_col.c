@@ -40,6 +40,32 @@ static t_bool	ft_check_col_val(const char *specs)
 	return (r);
 }
 
+static t_bool	ft_check_col_ids(const char **specs)
+{
+	int	checker[COL_NUM];
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < COL_NUM)
+		checker[i] = 0;
+	i = -1;
+	while (++i < COL_NUM)
+	{
+		if (ft_strchr (COL_IDS, specs[i][0]) == NULL)
+			return (FALSE);
+		else
+			checker[i] = (int) specs[i][0];
+		j = i;
+		while (j--)
+		{
+			dprintf (2, "%c == %c\n", checker[i], checker[j]);
+			if (checker[i] == checker[j])
+				return (FALSE);
+		}
+	}
+	return (TRUE);
+}
 /*
  ** @brief      Check colors specs format.
  **
@@ -55,20 +81,19 @@ static t_bool	ft_check_col_val(const char *specs)
 
 t_bool	ft_check_col(const char **specs)
 {
-	int		ids_count;
 	int		x;
 	int		y;
 	t_bool	r;
 
-	ids_count = ft_strlen(COL_IDS) / COL_NUM;
 	r = TRUE;
 	y = 0;
 	while (**specs == '\0')
 		specs++;
+	r *= ft_check_col_ids (specs);
 	while (y < COL_NUM && specs[y][0])
 	{
 		x = 0;
-		r *= (specs[y][x++] == COL_IDS[y * ids_count]);
+		x++;
 		r *= (specs[y][x++] == ' ');
 		while (specs[y][x] == ' ')
 			++x;

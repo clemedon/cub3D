@@ -33,6 +33,11 @@ Example: `chore: Update issues`
 
 # ――――――――→ cvidon ←――――――――
 
+
+fix: Leak when cub file start with empty line *not mandatory*
+
+feat: Any order possible for each type's elements
+
 refactor: Cleanup functions name
 - texture_fd -> texture_path
 - space_paren

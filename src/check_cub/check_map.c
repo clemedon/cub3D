@@ -9,37 +9,44 @@
  ** @return     True of false
  */
 
+static t_bool	ft_check_map_enclosure_2(char **map, int x, int y)
+{
+	t_bool	check;
+
+	check = 0;
+	if (map[y][x] == *MAP_ROOM || ft_strchr (MAP_SPAWN, map[y][x]))
+	{
+		if (!map[y][x - 1] || !map[y][x + 1])
+			return (FALSE);
+		if (!map[y - 1][x] || !map[y + 1][x])
+			return (FALSE);
+		if (map[y][x - 1])
+			check += (ft_strchr (MAP_INNER, map[y][x - 1]) != NULL);
+		if (map[y][x + 1])
+			check += (ft_strchr (MAP_INNER, map[y][x + 1]) != NULL);
+		if (map[y - 1][x])
+			check += (ft_strchr (MAP_INNER, map[y - 1][x]) != NULL);
+		if (map[y + 1][x])
+			check += (ft_strchr (MAP_INNER, map[y + 1][x]) != NULL);
+		if (check != 4)
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
 static t_bool	ft_check_map_enclosure(char **map, int width, int height)
 {
 	int		x;
 	int		y;
-	t_bool	check;
 
 	x = 0;
 	y = 0;
-	check = 0;
 	while (y < height)
 	{
 		while (x < width)
 		{
-			if (map[y][x] == *MAP_ROOM || ft_strchr (MAP_SPAWN, map[y][x]))
-			{
-				if (!map[y][x - 1] || !map[y][x + 1])
-					return (ft_return_msg (__func__, FALSE));
-				if (!map[y - 1][x] || !map[y + 1][x])
-					return (ft_return_msg (__func__, FALSE));
-				if (map[y][x - 1])
-					check += (ft_strchr (MAP_INNER, map[y][x - 1]) != NULL);
-				if (map[y][x + 1])
-					check += (ft_strchr (MAP_INNER, map[y][x + 1]) != NULL);
-				if (map[y - 1][x])
-					check += (ft_strchr (MAP_INNER, map[y - 1][x]) != NULL);
-				if (map[y + 1][x])
-					check += (ft_strchr (MAP_INNER, map[y + 1][x]) != NULL);
-				if (check != 4)
-					return (ft_return_msg (__func__, FALSE));
-				check = 0;
-			}
+			if (!ft_check_map_enclosure_2 (map, x, y))
+				return (FALSE);
 			x++;
 		}
 		x = 0;
@@ -67,11 +74,11 @@ static t_bool	ft_check_map_limits(const char **map)
 	width = ft_strtab_width (map);
 	grid = ft_gridify (map, width, height);
 	if (!grid)
-		return (ft_return_msg (__func__, FALSE));
+		return (FALSE);
 	if (!ft_check_map_enclosure (grid, width, height))
 	{
 		ft_freetab ((void **)grid);
-		return (ft_return_msg (__func__, FALSE));
+		return (FALSE);
 	}
 	ft_freetab ((void **)grid);
 	return (TRUE);
@@ -82,7 +89,7 @@ static t_bool	ft_check_map_limits(const char **map)
  **
  ** - only one spawn point allowed
  **
- ** @param[in]  specs the cub specs
+ ** @param[in]  map the cub map
  ** @return     True or false
  */
 
@@ -141,25 +148,23 @@ t_bool	ft_check_map_global(const char **map)
  **
  ** @param[in]  specs the cub specs
  ** @return     True or false
- **
- ** TODO check if the first 'while' is really useful, knowing that a map
- ** starting with an emptyline is not legal?
  */
 
 t_bool	ft_check_map(const char **specs)
 {
+	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
+	specs += 4 * (ft_strchr (COL_IDS, **specs) != NULL);
 	while (**specs == '\0')
 		specs++;
-	specs += (COL_NUM * (**specs == COL_IDS[0]));
-	specs += (TEX_NUM * (**specs == TEX_IDS[0]));
+	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
+	specs += 4 * (ft_strchr (COL_IDS, **specs) != NULL);
 	while (**specs == '\0')
 		specs++;
-
 	if (!ft_check_map_global (specs))
-		return (ft_return_msg (__func__, FALSE));
+		return (FALSE);
 	if (!ft_check_map_spawn (specs))
-		return (ft_return_msg (__func__, FALSE));
+		return (FALSE);
 	if (!ft_check_map_limits (specs))
-		return (ft_return_msg (__func__, FALSE));
+		return (FALSE);
 	return (TRUE);
 }

@@ -36,8 +36,16 @@ t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
 {
 	char	**rgb;
 
-	while (**specs != 'F')
+	// TODO
+	// - trouver un moyen de move jsk COLORS
+	// - adapter le color multi ordre a texture
+	dprintf (2, "specs: %s\n", *specs);
+	while (ft_strchr (COL_IDS, **specs) == NULL)
+	{
 		specs++;
+		dprintf (2, "specs: %s\n", *specs);
+	}
+	dprintf (2, "specs: %s\n", *specs);
 	rgb = ft_extract_rgb_val (*specs + 1);
 	if (!rgb)
 		return (FALSE);
