@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 11:20:38 by athirion          #+#    #+#             */
+/*   Updated: 2022/11/13 11:20:41 by athirion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	ft_side_move(t_data *data, t_point *p)
@@ -45,7 +57,8 @@ int	ft_move_player(t_data *data)
 
 	p.x = data->player.x;
 	p.y = data->player.y;
-	data->player.rotation_angle += (data->player.turn_direction * (PI / 180));
+	data->player.rotation_angle
+		+= data->player.turn_direction * data->player.turn_speed;
 	if (data->player.walk_direction == 1 && data->player.side_direction)
 		ft_oblique_move(data, &p);
 	else if (!data->player.walk_direction && data->player.side_direction)

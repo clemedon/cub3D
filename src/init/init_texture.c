@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 11:15:53 by athirion          #+#    #+#             */
+/*   Updated: 2022/11/13 11:15:54 by athirion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-void    ft_free_texture(t_cub *cub, t_mlx *mlx)
+void	ft_free_texture(t_cub *cub, t_mlx *mlx)
 {
 	int	i;
 
@@ -14,7 +26,7 @@ void    ft_free_texture(t_cub *cub, t_mlx *mlx)
 	}
 }
 
-static void    ft_pre_init_texture(t_cub *cub)
+static void	ft_pre_init_texture(t_cub *cub)
 {
 	int	i;
 

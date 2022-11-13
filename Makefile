@@ -52,7 +52,6 @@ SRCS        := \
 			   main.c \
 			   load.c \
 			   init/init.c \
-			   init/init_cast.c \
 			   init/init_cub.c \
 			   init/init_cub_attr.c \
 			   init/init_cub_map.c \
@@ -71,6 +70,8 @@ SRCS        := \
 			   quit.c \
 			   player.c \
 			   projection.c \
+			   rays_utils.c \
+			   rays_hit.c \
 			   rays.c \
 			   wall.c
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)

@@ -50,12 +50,12 @@
 
 # define ROWS		13
 # define COLS		20
-# define TILE_SIZE	64
+# define TILE_SIZE	128
 # define MAP_SCALE	0.25
 
 /* Window dimensions */
-# define WIN_HEIGHT	(ROWS * TILE_SIZE)
-# define WIN_WIDTH	(COLS * TILE_SIZE)
+# define WIN_HEIGHT	800
+# define WIN_WIDTH	1200
 
 /* Player direction */
 # define LEFT		-1
@@ -175,7 +175,7 @@ typedef struct s_player
 	float	turn_speed;
 }	t_player;
 
-typedef	struct s_proj
+typedef struct s_proj
 {
 	int		y;
 	int		offset[2];
@@ -262,34 +262,41 @@ int				ft_strtab_height(const char **tab);
 int				ft_strtab_width(const char **tab);
 
 /*
- ** wall.c
- */
-
-int				ft_is_wall(t_data *data, float x, float y);
-
-/*
  ** projection.c
  */
 
-/* static void ft_draw_ceiling(t_data *data) */
-/* static void ft_draw_floor(t_data *data) */
-/* static void ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture) */
-/* static t_text   ft_choose_texture(t_ray *ray, t_cub *cub) */
-void    ft_3d_projection(t_data *data);
+/* static void	ft_draw_ceiling(t_data *data) */
+/* static void	ft_draw_floor(t_data *data) */
+/* static void	ft_init_cast(t_data *data, */
+/* 		t_ray *ray, t_proj *p, t_text *texture) */
+/* static t_text ft_choose_texture(t_ray *ray, t_cub *cub) */
+void			ft_3d_projection(t_data *data);
+
+/*
+ ** rays_utils.c
+ */
+
+float			ft_normalize_angle(float angle);
+float			ft_dist(float player_x, float player_y,
+					float hit_x, float hit_y);
+void			ft_get_ray_orientation(t_cast *c, float ray_angle);
+void			ft_set_dist(t_data *data, t_cast *c);
+void			ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle);
+
+/*
+ ** rays_hit.c
+ */
+
+int				ft_is_wall(t_data *data, float x, float y);
+void			ft_horizontal_step(t_data *data, float ray_angle, t_cast *c);
+void			ft_horizontal_hit(t_data *data, t_cast *c);
+void			ft_vertical_step(t_data *data, float ray_angle, t_cast *c);
+void			ft_vertical_hit(t_data *data, t_cast *c);
 
 /*
  ** rays.c
  */
 
-/* float ft_normalize_angle(float angle); */
-/* float ft_dist(float player_x, float player_y, float hit_x, float hit_y); */
-/* void			ft_get_ray_orientation(t_cast *c, float ray_angle); */
-/* void			ft_horizontal_step(t_data *data, float ray_angle, t_cast *c); */
-/* void			ft_horizontal_hit(t_data *data, t_cast *c); */
-/* void			ft_vertical_step(t_data *data, float ray_angle, t_cast *c); */
-/* void			ft_vertical_hit(t_data *data, t_cast *c); */
-/* void			ft_set_dist(t_data *data, t_cast *c); */
-/* void			ft_dist_cmp(t_cast *c, t_ray *ray, float ray_angle); */
 /* void			ft_cast_ray(t_data *data, float ray_angle, t_ray *ray); */
 void			ft_cast_all_rays(t_data *data);
 
@@ -319,41 +326,42 @@ void			ft_mouse_event(t_data *data);
  ** draw.c
  */
 
-/* void		ft_draw_mini_map(t_data *data); */
-/* void		ft_draw_grid(t_data *data); */
-/* void		ft_draw_rays(t_data *data); */
-/* void		ft_draw_player(t_data *data); */
+/* void			ft_draw_mini_map(t_data *data); */
+/* void			ft_draw_grid(t_data *data); */
+/* void			ft_draw_rays(t_data *data); */
+/* void			ft_draw_player(t_data *data); */
 int				ft_render(t_data *data);
 
 /*
  ** draw_utils.c
  */
 
-void		ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
-void		ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
-void		ft_draw_rect(t_data *data, t_point start, int width, int height);
-void		ft_draw_circle(t_data *data, t_point center, double radius);
+void			ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void			ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
+void			ft_draw_rect(t_data *data,
+					t_point start, int width, int height);
+void			ft_draw_circle(t_data *data, t_point center, double radius);
 
 /*
  ** init_rays.c
  */
 
-void		ft_init_rays(t_data *data);
+void			ft_init_rays(t_data *data);
 
 /*
  ** init_player.c
  */
 
-/* void ft_get_player_position(t_data *data) */
-/* void ft_get_player_orientation(t_data *data) */
-void		ft_init_player(t_data *data);
+/* void 		ft_get_player_position(t_data *data) */
+/* void 		ft_get_player_orientation(t_data *data) */
+void			ft_init_player(t_data *data);
 
 /*
  ** init_texture.c
  */
 
-void    		ft_free_texture(t_cub *cub, t_mlx *mlx);
-/* void    ft_pre_init_texture(t_cub *cub) */
+void			ft_free_texture(t_cub *cub, t_mlx *mlx);
+/* void			ft_pre_init_texture(t_cub *cub) */
 t_bool			ft_init_texture(t_cub *cub, t_mlx *mlx);
 
 /*
@@ -384,7 +392,7 @@ t_bool			ft_init_cub_map(t_cub *cub, const char **specs);
  ** init_cub.c
  */
 
-void			ft_free_cub (t_cub *cub);
+void			ft_free_cub(t_cub *cub);
 /* void		ft_pre_init_cub(t_cub *cub) */
 t_bool			ft_init_cub(t_cub *cub, const char **specs);
 
@@ -392,7 +400,7 @@ t_bool			ft_init_cub(t_cub *cub, const char **specs);
  ** init.c
  */
 
-t_bool			ft_init (t_data *data, const char **specs);
+t_bool			ft_init(t_data *data, const char **specs);
 
 /*
  ** check_cub/

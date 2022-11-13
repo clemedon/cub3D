@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 11:17:24 by athirion          #+#    #+#             */
+/*   Updated: 2022/11/13 11:17:26 by athirion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	ft_free_mlx(t_mlx *mlx)
@@ -7,7 +19,7 @@ void	ft_free_mlx(t_mlx *mlx)
 	if (mlx->win_ptr)
 		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
 	if (mlx->mlx_ptr)
-		mlx_destroy_display(mlx->mlx_ptr); // OS
+		mlx_destroy_display(mlx->mlx_ptr);
 	ft_free (mlx->mlx_ptr);
 }
 

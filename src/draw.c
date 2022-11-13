@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/13 11:21:44 by athirion          #+#    #+#             */
+/*   Updated: 2022/11/13 11:21:48 by athirion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 void	ft_draw_mini_map(t_data *data)
@@ -11,7 +23,7 @@ void	ft_draw_mini_map(t_data *data)
 	p.color = 0xFFFFFF;
 	i = -1;
 	ft_draw_rect(data, p, TILE_SIZE * MAP_SCALE * data->cub.width,
-			TILE_SIZE * MAP_SCALE * data->cub.height);
+		TILE_SIZE * MAP_SCALE * data->cub.height);
 	p.color = data->cub.f_color_hex;
 	while (++i < data->cub.height)
 	{
@@ -21,7 +33,7 @@ void	ft_draw_mini_map(t_data *data)
 		{
 			if (data->cub.map[i][j] == 1)
 				ft_draw_rect(data, p, TILE_SIZE * MAP_SCALE,
-						TILE_SIZE * MAP_SCALE);
+					TILE_SIZE * MAP_SCALE);
 			p.x += TILE_SIZE * MAP_SCALE;
 		}
 		p.y += TILE_SIZE * MAP_SCALE;
@@ -79,6 +91,6 @@ int	ft_render(t_data *data)
 			ft_draw_rays(data);
 	}
 	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win_ptr,
-			data->mlx.img_ptr, 0, 0);
+		data->mlx.img_ptr, 0, 0);
 	return (TRUE);
 }
