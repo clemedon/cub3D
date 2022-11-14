@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:22:13 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 11:22:15 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:56:55 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,14 @@ void	ft_key_event(int key, t_data *data)
 	else if (key == TURN_RIGHT)
 		data->player.turn_direction = 1;
 	else if (key == MINIMAP)
+	{
+		if (data->cub.minimap == 1)
+		{
+			ft_free_minimap(&data->minimap);
+			ft_pre_init_minimap(data);
+		}
 		data->cub.minimap *= -1;
+	}
 	else if (key == RAY)
 		data->cub.ray *= -1;
 }

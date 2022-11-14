@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:19:28 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 11:19:29 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/14 17:22:30 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
 	point = begin;
 	while (pixel)
 	{
-		if (point.x >= 0 && point.x < WIN_WIDTH
-			&& point.y >= 0 && point.y < WIN_HEIGHT)
+		if (point.x >= 0 && point.y >= 0)//TODO && point.x < w && point.y < h)
 			ft_my_mlx_pixel_put(mlx, point.x, point.y, point.color);
 		if (begin.x < end.x)
 			point.x += delta.x;
@@ -49,7 +48,7 @@ void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
 	}
 }
 
-void	ft_draw_rect(t_data *data, t_point start, int width, int height)
+void	ft_draw_rect(t_mlx *mlx, t_point start, int width, int height)
 {
 	int		i;
 	t_point	end;
@@ -60,13 +59,13 @@ void	ft_draw_rect(t_data *data, t_point start, int width, int height)
 	while (i < height)
 	{
 		end.y = start.y;
-		ft_draw_line(&data->mlx, start, end);
+		ft_draw_line(mlx, start, end);
 		start.y ++;
 		i ++;
 	}
 }
 
-void	ft_draw_circle(t_data *data, t_point center, double radius)
+void	ft_draw_circle(t_mlx *mlx, t_point center, double radius)
 {
 	int		i;
 	t_point	c;
@@ -79,7 +78,7 @@ void	ft_draw_circle(t_data *data, t_point center, double radius)
 		{
 			c.x = cos(i * (180 / PI)) * radius;
 			c.y = sin(i * (180 / PI)) * radius;
-			ft_my_mlx_pixel_put(&data->mlx, center.x + c.x,
+			ft_my_mlx_pixel_put(mlx, center.x + c.x,
 				center.y + c.y, center.color);
 			i ++;
 		}

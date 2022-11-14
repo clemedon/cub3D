@@ -20,6 +20,7 @@ t_bool  ft_init (t_data *data, const char **specs)
 		ft_free_mlx (&data->mlx);
 		return (FALSE);
 	}
+	ft_pre_init_minimap(data);
 	ft_init_player(data);
 	ft_init_rays(data);
 	return (TRUE);

@@ -50,6 +50,7 @@ INCS        := $(INCS) $(addsuffix include,$(dir $(LIBS_TARGET)))
 SRC_DIR     := src
 SRCS        := \
 			   main.c \
+			   minimap.c \
 			   load.c \
 			   init/init.c \
 			   init/init_cub.c \
@@ -72,8 +73,7 @@ SRCS        := \
 			   projection.c \
 			   rays_utils.c \
 			   rays_hit.c \
-			   rays.c \
-			   wall.c
+			   rays.c
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 
 BUILD_DIR   := .build

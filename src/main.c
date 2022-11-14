@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 17:23:18 by athirion          #+#    #+#             */
+/*   Updated: 2022/11/14 17:23:20 by athirion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 static void	ft_check_arg(const char *arg)
@@ -17,10 +29,9 @@ static void	ft_check_arg(const char *arg)
 		ft_exit_error (NULL, ER_USAGE);
 }
 
-
 int	main(int ac, char **argv)
 {
-	t_data	data;
+	t_data		data;
 	const char	**specs;
 
 	if (ac == 2)

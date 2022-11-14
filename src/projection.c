@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:19:58 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 11:19:59 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/13 16:32:36 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_draw_ceiling(t_data *data)
 	ceiling.x = 0;
 	ceiling.y = 0;
 	ceiling.color = data->cub.c_color_hex;
-	ft_draw_rect(data, ceiling, WIN_WIDTH, WIN_HEIGHT / 2);
+	ft_draw_rect(&data->mlx, ceiling, WIN_WIDTH, WIN_HEIGHT / 2);
 }
 
 static void	ft_draw_floor(t_data *data)
@@ -29,7 +29,7 @@ static void	ft_draw_floor(t_data *data)
 	floor.x = 0;
 	floor.y = WIN_HEIGHT / 2;
 	floor.color = data->cub.f_color_hex;
-	ft_draw_rect(data, floor, WIN_WIDTH, WIN_HEIGHT / 2);
+	ft_draw_rect(&data->mlx, floor, WIN_WIDTH, WIN_HEIGHT / 2);
 }
 
 static void	ft_init_cast(t_data *data, t_ray *ray, t_proj *p, t_text *texture)

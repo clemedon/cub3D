@@ -49,8 +49,8 @@
 /* Map constants */
 
 # define TILE_SIZE	64
-# define MAP_SCALE	0.25
-
+# define MAP_SCALE	0.5
+# define MINIMAP_SIZE 32
 /* Window dimensions */
 # define WIN_HEIGHT	800
 # define WIN_WIDTH	1200
@@ -151,6 +151,12 @@ typedef struct s_mlx
 	int		line_length;
 }	t_mlx;
 
+typedef struct s_minimap
+{
+	t_mlx	mlx;
+	int		rays;
+}	t_minimap;
+
 typedef struct s_point
 {
 	double	x;
@@ -233,6 +239,7 @@ typedef struct s_cast
 typedef struct s_data
 {
 	t_cub		cub;
+	t_minimap	minimap;
 	t_player	player;
 	t_ray		rays[NUM_RAYS];
 	t_mlx		mlx;
@@ -260,6 +267,16 @@ t_bool			ft_str_onlywith(const char *str, const char *charset);
 char			*ft_replace_char(char *str, char find, char replace);
 int				ft_strtab_height(const char **tab);
 int				ft_strtab_width(const char **tab);
+
+/*
+ ** minimap.c
+ */
+
+void			ft_free_minimap(t_minimap *minimap);
+void			ft_pre_init_minimap(t_data *data);
+/* int			ft_init_minimap(t_data *data, t_minimap *minimap) */
+/* int			ft_render_minimap(t_data *data, t_minimap *minimap) */
+void			ft_minimap(t_data *data);
 
 /*
  ** projection.c
@@ -326,10 +343,9 @@ void			ft_mouse_event(t_data *data);
  ** draw.c
  */
 
-/* void			ft_draw_mini_map(t_data *data); */
-/* void			ft_draw_grid(t_data *data); */
-/* void			ft_draw_rays(t_data *data); */
-/* void			ft_draw_player(t_data *data); */
+void			ft_draw_mini_map(t_data *data, t_minimap *minimap);
+void			ft_draw_rays(t_data *data, t_minimap *minimap);
+void			ft_draw_player(t_data *data, t_minimap *minimap);
 int				ft_render(t_data *data);
 
 /*
@@ -338,9 +354,9 @@ int				ft_render(t_data *data);
 
 void			ft_my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 void			ft_draw_line(t_mlx *mlx, t_point begin, t_point end);
-void			ft_draw_rect(t_data *data,
+void			ft_draw_rect(t_mlx *mlx,
 					t_point start, int width, int height);
-void			ft_draw_circle(t_data *data, t_point center, double radius);
+void			ft_draw_circle(t_mlx *mlx, t_point center, double radius);
 
 /*
  ** init_rays.c
