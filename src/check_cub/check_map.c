@@ -153,11 +153,11 @@ t_bool	ft_check_map_global(const char **map)
 t_bool	ft_check_map(const char **specs)
 {
 	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
-	specs += 4 * (ft_strchr (COL_IDS, **specs) != NULL);
+	specs += 4 * (ft_strchr (TEX_IDS, **specs) != NULL);
 	while (**specs == '\0')
 		specs++;
 	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
-	specs += 4 * (ft_strchr (COL_IDS, **specs) != NULL);
+	specs += 4 * (ft_strchr (TEX_IDS, **specs) != NULL);
 	while (**specs == '\0')
 		specs++;
 	if (!ft_check_map_global (specs))

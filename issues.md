@@ -33,8 +33,12 @@ Example: `chore: Update issues`
 
 # ――――――――→ cvidon ←――――――――
 
+fix: texture is directory
+    make asan && ./cub3D maps/error_maps/texture_is_directory.cub
 
-fix: Leak when cub file start with empty line *not mandatory*
+Check the write() size!!
+
+fix: Protect cub files with empty lines at start or end.
 
 feat: Any order possible for each type's elements
 

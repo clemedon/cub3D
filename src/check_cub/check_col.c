@@ -1,43 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_col.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 11:32:31 by cvidon            #+#    #+#             */
+/*   Updated: 2022/11/15 11:32:31 by cvidon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 /*
  ** @brief      Check colors specs value.
  **
- ** - Three numbers, comma-separated:
+ ** - 3 numbers made of 1 to 3 digits, comma-separated:
  **
  **   '<0_to_255>,<0_to_255>,<0_to_255>'
- **   TODO 0003
  **
  ** @param[in]  specs the cub specs
  ** @return     True or false.
  */
 
-static t_bool	ft_check_col_val(const char *specs)
+static t_bool	ft_check_col_value(const char *specs)
 {
-	int		r;
 	int		x;
 	int		y;
-	char	color[3][4];
+	char	col[3][4];
 
-	r = TRUE;
 	y = 0;
-	if (!ft_isdigit (*specs))
-		return (FALSE);
 	while (y < 3)
 	{
 		x = 0;
-		specs += (*specs && *specs == ',');
-		while (*specs && *specs != ',' && x < 3)
+		if (*specs && specs[0] == '0' && ft_isdigit(specs[1]))
+			return (FALSE);
+		while (*specs && *specs != ',')
 		{
-			r *= ft_isdigit (*specs);
-			ft_memcpy ((void *)&color[y][x++], (void *)specs++, 1);
+			if (!ft_isdigit (*specs) || (x >= 3))
+				return (FALSE);
+			ft_memcpy ((void *)&col[y][x++], (void *)specs++, 1);
 		}
-		r *= (!(*specs && ft_isdigit (*specs)));
-		color[y][x] = 0;
-		r *= (ft_atoi (color[y]) <= 255);
+		if (y == 2 && (*specs != '\0'))
+			return (FALSE);
+		col[y][x] = '\0';
+		if ((col[y][0] == 0) || (ft_atoi (col[y]) > 255 || ft_atoi(col[y]) < 0))
+			return (FALSE);
 		y++;
+		specs += (*specs && *specs == ',');
 	}
-	return (r);
+	return (TRUE);
 }
 
 static t_bool	ft_check_col_ids(const char **specs)
@@ -58,14 +70,12 @@ static t_bool	ft_check_col_ids(const char **specs)
 			checker[i] = (int) specs[i][0];
 		j = i;
 		while (j--)
-		{
-			dprintf (2, "%c == %c\n", checker[i], checker[j]);
 			if (checker[i] == checker[j])
 				return (FALSE);
-		}
 	}
 	return (TRUE);
 }
+
 /*
  ** @brief      Check colors specs format.
  **
@@ -93,11 +103,11 @@ t_bool	ft_check_col(const char **specs)
 	while (y < COL_NUM && specs[y][0])
 	{
 		x = 0;
-		x++;
+		x += ft_strlen (COL_IDS) / COL_NUM;
 		r *= (specs[y][x++] == ' ');
 		while (specs[y][x] == ' ')
 			++x;
-		r *= ((specs[y][x] != '\0') && ft_check_col_val(&specs[y][x]));
+		r *= ((specs[y][x] != '\0') && ft_check_col_value (&specs[y][x]));
 		y++;
 	}
 	r *= ((y == COL_NUM) && (specs[y][0] == '\0'));
