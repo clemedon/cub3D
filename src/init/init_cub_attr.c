@@ -6,7 +6,7 @@
 /*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:18:29 by cvidon            #+#    #+#             */
-/*   Updated: 2022/11/15 12:18:29 by cvidon           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:45:23 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,66 @@ static char	**ft_extract_rgb_val(const char *color)
  ** @return     True or false.
  */
 
-t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
+static t_bool	ft_init_cub_color_fc(t_cub *cub, const char **specs)
 {
 	char	**rgb;
 
+	specs++;
+	if (**specs == 'F')
+	{
+		rgb = ft_extract_rgb_val (*specs + 1);
+		if (!rgb)
+			return (FALSE);
+		cub->f_color_hex = ft_create_rgb
+			(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
+		ft_freetab ((void **)rgb);
+	}
+	else if (**specs == 'C')
+	{
+		rgb = ft_extract_rgb_val (*specs + 1);
+		if (!rgb)
+			return (FALSE);
+		cub->c_color_hex = ft_create_rgb
+			(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
+		ft_freetab ((void **)rgb);
+	}
+	return (TRUE);
+}
+
+static t_bool	ft_init_cub_color_cf(t_cub *cub, const char **specs)
+{
+	char	**rgb;
+
+	if (**specs == 'C')
+	{
+		rgb = ft_extract_rgb_val (*specs + 1);
+		if (!rgb)
+			return (FALSE);
+		cub->c_color_hex = ft_create_rgb
+			(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
+		ft_freetab ((void **)rgb);
+	}
+	else if (**specs == 'F')
+	{
+		rgb = ft_extract_rgb_val (*specs + 1);
+		if (!rgb)
+			return (FALSE);
+		cub->f_color_hex = ft_create_rgb
+			(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
+		ft_freetab ((void **)rgb);
+	}
+	return (TRUE);
+}
+
+t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
+{
 	specs += 4 * (ft_strchr (TEX_IDS, **specs) != NULL);
 	while (**specs == '\0')
 		specs++;
-	rgb = ft_extract_rgb_val (*specs + 1);
-	if (!rgb)
+	if (!ft_init_cub_color_cf (cub, specs))
 		return (FALSE);
-	cub->f_color_hex = ft_create_rgb
-		(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
-	ft_freetab ((void **)rgb);
-	specs++;
-	rgb = ft_extract_rgb_val (*specs + 1);
-	if (!rgb)
+	if (!ft_init_cub_color_fc (cub, specs))
 		return (FALSE);
-	cub->c_color_hex = ft_create_rgb
-		(ft_atoi (rgb[0]), ft_atoi (rgb[1]), ft_atoi (rgb[2]));
-	ft_freetab ((void **)rgb);
 	return (TRUE);
 }
 
@@ -89,13 +129,13 @@ t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 		texture = ft_strtrim (&specs[i][2], " ");
 		if (!texture)
 			return (FALSE);
-		if (i == 0)
+		if (specs[i][0] == 'N')
 			cub->n_texture = texture;
-		if (i == 1)
+		if (specs[i][0] == 'S')
 			cub->s_texture = texture;
-		if (i == 2)
+		if (specs[i][0] == 'W')
 			cub->w_texture = texture;
-		if (i == 3)
+		if (specs[i][0] == 'E')
 			cub->e_texture = texture;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:21:44 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/14 17:19:48 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:53:46 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	ft_draw_mini_map(t_data *data, t_minimap *minimap)
 
 	p.x = 0;
 	p.y = 0;
-	p.color = 0xFFFFFF;
+	p.color = data->cub.f_color_hex;
 	i = -1;
 	ft_draw_rect(&minimap->mlx, p, MINIMAP_SIZE * data->cub.width * MAP_SCALE,
 		MINIMAP_SIZE * data->cub.height * MAP_SCALE);
-	p.color = data->cub.f_color_hex;
+	p.color = data->cub.c_color_hex;
 	while (++i < data->cub.height)
 	{
 		j = -1;

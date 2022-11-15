@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 10:50:59 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/15 12:38:04 by cvidon           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:19:17 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,6 +399,8 @@ int				ft_init_mlx(t_mlx *mlx);
  */
 
 /* char 		**ft_extract_rgb_val(const char *color); */
+/* t_bool		ft_init_cub_color_cf(t_cub *cub, const char **specs) */
+/* t_bool		ft_init_cub_color_fc(t_cub *cub, const char **specs) */
 t_bool			ft_init_cub_color(t_cub *cub, const char **specs);
 t_bool			ft_init_cub_texture(t_cub *cub, const char **specs);
 

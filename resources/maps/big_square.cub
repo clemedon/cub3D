@@ -1,10 +1,11 @@
-NO resources/textures/stone.xpm
-SO resources/textures/coal.xpm
-WE resources/textures/brickov.xpm
-EA resources/textures/walkstone.xpm
+NO resources/textures/n.xpm
+SO resources/textures/s.xpm
+WE resources/textures/w.xpm
+EA resources/textures/e.xpm
 
-F 80,84,92
-C 117,164,240
+F 255,30,100
+C 19,22,61
+
 
 111111111111111111111111111111111111
 100000000000000000000000000000000001

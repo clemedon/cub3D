@@ -6,7 +6,7 @@
 /*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:11:20 by cvidon            #+#    #+#             */
-/*   Updated: 2022/11/15 12:15:34 by cvidon           ###   ########.fr       */
+/*   Updated: 2022/11/15 14:45:06 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,18 @@ static t_bool	ft_check_map_global(const char **map)
 
 t_bool	ft_check_map(const char **specs)
 {
-	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
-	specs += 4 * (ft_strchr (TEX_IDS, **specs) != NULL);
 	while (**specs == '\0')
 		specs++;
-	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
-	specs += 4 * (ft_strchr (TEX_IDS, **specs) != NULL);
+	if (ft_strchr (COL_IDS, **specs) != NULL)
+		specs += 2;
+	else if (ft_strchr (TEX_IDS, **specs) != NULL)
+		specs += 4;
+	while (**specs == '\0')
+		specs++;
+	if (ft_strchr (COL_IDS, **specs) != NULL)
+		specs += 2;
+	else if (ft_strchr (TEX_IDS, **specs) != NULL)
+		specs += 4;
 	while (**specs == '\0')
 		specs++;
 	if (!ft_check_map_global (specs))

@@ -1,10 +1,10 @@
-NO ./resources/textures/test_n.xpm
-SO ./resources/textures/test_s.xpm
-WE ./resources/textures/test_w2.xpm
-EA ./resources/textures/test_e.xpm
+NO ./resources/textures/n.xpm
+SO ./resources/textures/s.xpm
+WE ./resources/textures/w.xpm
+EA ./resources/textures/e.xpm
 
-F 153,159,207
-C 31,34,61
+F 255,30,100
+C 19,22,61
 
 1111111111111111111111111111111111111111111111111111111111111111
 1000000000000000000000000000000000000000000000000000000000000001
