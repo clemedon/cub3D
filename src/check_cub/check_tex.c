@@ -19,8 +19,10 @@ static t_bool	ft_check_tex_value(const char *specs)
 	close (fd);
 	fd = open (specs, O_DIRECTORY);
 	if (fd >= 0)
+	{
+		close (fd);
 		return (FALSE);
-	close (fd);
+	}
 	return (TRUE);
 }
 
