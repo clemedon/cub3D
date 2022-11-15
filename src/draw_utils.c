@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:19:28 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/14 17:22:30 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/15 11:02:52 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	ft_draw_line(t_mlx *mlx, t_point begin, t_point end)
 	point = begin;
 	while (pixel)
 	{
-		if (point.x >= 0 && point.y >= 0)//TODO && point.x < w && point.y < h)
+		if (point.x >= 0 && point.y >= 0
+			&& point.x < WIN_WIDTH && point.y < WIN_HEIGHT)
 			ft_my_mlx_pixel_put(mlx, point.x, point.y, point.color);
 		if (begin.x < end.x)
 			point.x += delta.x;

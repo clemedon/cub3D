@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_cub.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 12:16:19 by cvidon            #+#    #+#             */
+/*   Updated: 2022/11/15 12:17:15 by cvidon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
-void ft_free_cub (t_cub *cub)
+void	ft_free_cub(t_cub *cub)
 {
 	ft_free (cub->n_texture);
 	ft_free (cub->s_texture);
@@ -9,7 +21,7 @@ void ft_free_cub (t_cub *cub)
 	if (cub->specs)
 		ft_freetab ((void **)cub->specs);
 	if (cub->map)
-		ft_freetab_size ((void**)cub->map, cub->height);
+		ft_freetab_size ((void **)cub->map, cub->height);
 }
 
 static void	ft_pre_init_cub(t_cub *cub)

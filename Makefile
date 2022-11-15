@@ -49,31 +49,33 @@ INCS        := $(INCS) $(addsuffix include,$(dir $(LIBS_TARGET)))
 
 SRC_DIR     := src
 SRCS        := \
-			   main.c \
+			   utils/utils.c \
+			   utils/strutils.c \
 			   minimap.c \
-			   load.c \
-			   init/init.c \
-			   init/init_cub.c \
-			   init/init_cub_attr.c \
-			   init/init_cub_map.c \
-			   init/init_mlx.c \
-			   init/init_player.c \
-			   init/init_rays.c \
-			   init/init_texture.c \
-			   check_cub/check_cub.c \
-			   check_cub/check_col.c \
-			   check_cub/check_tex.c \
-			   check_cub/check_map.c \
-			   utils.c \
-			   event.c \
-			   draw.c \
-			   draw_utils.c \
-			   quit.c \
-			   player.c \
 			   projection.c \
 			   rays_utils.c \
 			   rays_hit.c \
-			   rays.c
+			   rays.c \
+			   player.c \
+			   event.c \
+			   draw.c \
+			   draw_utils.c \
+			   init/init_rays.c \
+			   init/init_player.c \
+			   init/init_texture.c \
+			   init/init_mlx.c \
+			   init/init_cub_attr.c \
+			   init/init_cub_map.c \
+			   init/init_cub.c \
+			   init/init.c \
+			   check_cub/check_map_2.c \
+			   check_cub/check_map.c \
+			   check_cub/check_tex.c \
+			   check_cub/check_col.c \
+			   check_cub/check_cub.c \
+			   load.c \
+			   main.c
+
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 
 BUILD_DIR   := .build
@@ -81,7 +83,7 @@ OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS        := $(OBJS:.o=.d)
 
 CC          := clang
-CFLAGS      := $(CFLAGS)   -Wall -Wextra -Werror -g
+CFLAGS      := $(CFLAGS)   -Wall -Wextra -Werror
 CPPFLAGS    := $(CPPFLAGS) $(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS     := $(LDFLAGS)  $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS      := $(LDLIBS)   $(addprefix -l,$(LIBS))

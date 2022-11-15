@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_cub_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 12:17:35 by cvidon            #+#    #+#             */
+/*   Updated: 2022/11/15 12:17:53 by cvidon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 /*
@@ -7,8 +19,6 @@
  **
  ** @param[in]  str an array of chars
  ** @return     The numerical id corresponding to the given char.
- **
- ** TODO init utils .c ?
  */
 
 static int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
@@ -45,8 +55,6 @@ static int	*ft_maprow_to_int(const char *maprow, int *introw, int width)
  ** @param[in]  width the map width
  ** @param[in]  height the map height
  ** @return     An integer version of the map
- **
- ** TODO init utils .c ?
  */
 
 static int	**ft_map_to_int(const char **charmap, int width, int height)
@@ -79,9 +87,6 @@ static int	**ft_map_to_int(const char **charmap, int width, int height)
  **
  ** @param[out] cub the cub structure
  ** @param[in]  specs the cub specs
- **
- ** TODO init_map
- ** starting with an emptyline is not legal?
  */
 
 t_bool	ft_init_cub_map(t_cub *cub, const char **specs)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_cub.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cvidon <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 12:08:59 by cvidon            #+#    #+#             */
+/*   Updated: 2022/11/15 12:55:44 by cvidon           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube.h"
 
 /*
@@ -21,20 +33,20 @@ static t_bool	ft_check_cub_elements(const char **specs)
 	if (ft_strchr (COL_IDS, **specs) != NULL)
 	{
 		if (ft_check_col (specs) == FALSE)
-			return (write (2, "Error\nInvalid .cub colors\n", 27) == 0);
+			return (write (2, "Error\nInvalid .cub colors\n", 26) == 0);
 		if (ft_check_tex (specs + COL_NUM) == FALSE)
-			return (write (2, "Error\nInvalid .cub textures\n", 29) == 0);
+			return (write (2, "Error\nInvalid .cub textures\n", 28) == 0);
 		if (ft_check_map (specs + COL_NUM) == FALSE)
-			return (write (2, "Error\nInvalid .cub map\n", 24) == 0);
+			return (write (2, "Error\nInvalid .cub map\n", 23) == 0);
 	}
 	else if (ft_strchr (TEX_IDS, **specs) != NULL)
 	{
 		if (ft_check_tex (specs) == FALSE)
-			return (write (2, "Error\nInvalid .cub textures\n", 29) == 0);
+			return (write (2, "Error\nInvalid .cub textures\n", 28) == 0);
 		if (ft_check_col (specs + TEX_NUM) == FALSE)
-			return (write (2, "Error\nInvalid .cub colors\n", 27) == 0);
+			return (write (2, "Error\nInvalid .cub colors\n", 26) == 0);
 		if (ft_check_map (specs + TEX_NUM) == FALSE)
-			return (write (2, "Error\nInvalid .cub map\n", 24) == 0);
+			return (write (2, "Error\nInvalid .cub map\n", 23) == 0);
 	}
 	else
 		return (write (2, "Error\nInvalid .cub first line\n", 30) == 0);

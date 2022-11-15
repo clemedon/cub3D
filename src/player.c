@@ -6,13 +6,13 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 11:20:38 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/13 15:16:09 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/15 12:21:58 by cvidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	ft_side_move(t_data *data, t_point *p)
+static void	ft_side_move(t_data *data, t_point *p)
 {
 	float	step;
 
@@ -21,7 +21,7 @@ void	ft_side_move(t_data *data, t_point *p)
 	p->y = data->player.y - step * cos(data->player.rotation_angle);
 }
 
-void	ft_oblique_move(t_data *data, t_point *p)
+static void	ft_oblique_move(t_data *data, t_point *p)
 {
 	float	step;
 
@@ -42,7 +42,7 @@ void	ft_oblique_move(t_data *data, t_point *p)
 	}
 }
 
-void	ft_straight_move(t_data *data, t_point *p)
+static void	ft_straight_move(t_data *data, t_point *p)
 {
 	float	step;
 
