@@ -14,30 +14,49 @@
  ** @return     True or false.
  */
 
+static t_bool	ft_check_cub_elements(const char **specs)
+{
+	if (**specs == '\0')
+		return (write (2, "Error\nInvalid .cub file first line\n", 35) == 0);
+	if (ft_strchr (COL_IDS, **specs) != NULL)
+	{
+		if (ft_check_col (specs) == FALSE)
+			return (write (2, "Error\nInvalid .cub colors\n", 27) == 0);
+		if (ft_check_tex (specs + COL_NUM) == FALSE)
+			return (write (2, "Error\nInvalid .cub textures\n", 29) == 0);
+		if (ft_check_map (specs + COL_NUM) == FALSE)
+			return (write (2, "Error\nInvalid .cub map\n", 24) == 0);
+	}
+	else if (ft_strchr (TEX_IDS, **specs) != NULL)
+	{
+		if (ft_check_tex (specs) == FALSE)
+			return (write (2, "Error\nInvalid .cub textures\n", 29) == 0);
+		if (ft_check_col (specs + TEX_NUM) == FALSE)
+			return (write (2, "Error\nInvalid .cub colors\n", 27) == 0);
+		if (ft_check_map (specs + TEX_NUM) == FALSE)
+			return (write (2, "Error\nInvalid .cub map\n", 24) == 0);
+	}
+	else
+		return (write (2, "Error\nInvalid .cub first line\n", 30) == 0);
+	return (TRUE);
+}
+
 t_bool	ft_check_cub(const char **specs)
 {
 	int		height;
-	t_bool	r;
 
-	r = TRUE;
 	height = 0;
-	while (specs[height])
+	while (specs[height + 1])
 		height++;
-	if (**specs == COL_IDS[0] && height >= 11)
+	if (*specs[height] == '\0')
 	{
-		r *= ft_check_col (specs);
-		r *= ft_check_tex (specs + COL_NUM);
-		r *= ft_check_map (specs + COL_NUM);
-	}
-	else if (**specs == TEX_IDS[0] && height >= 11)
-	{
-		r *= ft_check_tex (specs);
-		r *= ft_check_col (specs + TEX_NUM);
-		r *= ft_check_map (specs + TEX_NUM);
-	}
-	else
-		return (FALSE);
-	if (!r)
 		ft_freetab ((void **)specs);
-	return (r);
+		return (write (2, "Error\nInvalid .cub map\n", 23) == 0);
+	}
+	if (ft_check_cub_elements(specs) == FALSE)
+	{
+		ft_freetab ((void **)specs);
+		return (FALSE);
+	}
+	return (TRUE);
 }

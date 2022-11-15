@@ -17,6 +17,34 @@ static t_bool	ft_check_tex_value(const char *specs)
 	if (fd < 0)
 		return (FALSE);
 	close (fd);
+	fd = open (specs, O_DIRECTORY);
+	if (fd >= 0)
+		return (FALSE);
+	close (fd);
+	return (TRUE);
+}
+
+static t_bool	ft_check_tex_ids(const char **specs)
+{
+	int	checker[TEX_NUM];
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < TEX_NUM)
+		checker[i] = 0;
+	i = -1;
+	while (++i < TEX_NUM)
+	{
+		if (ft_strchr (TEX_IDS, specs[i][0]) == NULL)
+			return (FALSE);
+		else
+			checker[i] = (int) specs[i][0];
+		j = i;
+		while (j--)
+			if (checker[i] == checker[j])
+				return (FALSE);
+	}
 	return (TRUE);
 }
 
@@ -35,27 +63,25 @@ static t_bool	ft_check_tex_value(const char *specs)
 
 t_bool	ft_check_tex(const char **specs)
 {
-	int		ids_count;
 	int		x;
 	int		y;
 	int		r;
 
-	ids_count = ft_strlen (TEX_IDS) / TEX_NUM;
 	r = TRUE;
 	y = 0;
 	while (**specs == '\0')
 		specs++;
+	r *= ft_check_tex_ids (specs);
 	while (y < TEX_NUM && specs[y][0])
 	{
 		x = 0;
-		r *= (specs[y][x++] == TEX_IDS[y * ids_count]);
-		r *= (specs[y][x++] == TEX_IDS[y * ids_count + 1]);
+		x += ft_strlen (TEX_IDS) / TEX_NUM;
 		r *= (specs[y][x++] == ' ');
 		while (specs[y][x] == ' ')
 			++x;
 		r *= ((specs[y][x] != '\0') && ft_check_tex_value (&specs[y][x]));
 		y++;
 	}
-	r *= ((y == TEX_NUM) && (specs[y][0] == '\0'));
+	r *= ((y == TEX_NUM) && specs[y] && (specs[y][0] == '\0'));
 	return (r);
 }

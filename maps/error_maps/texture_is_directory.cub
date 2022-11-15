@@ -1,9 +1,9 @@
-NO ../../textures/directory.xpm
-EA ../../textures/WALL2.xpm
-WE ../../textures/WALL3.xpm
-SO ../../textures/WALL4.xpm
+NO resources/
+SO resources/brickov.xpm
+WE resources/brickov.xpm
+EA resources/brickov.xpm
 
- F       150,150,150
+F       150,150,150
 C 70,70,70
 
         1111111111111111111111111

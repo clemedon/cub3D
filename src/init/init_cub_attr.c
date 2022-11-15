@@ -36,7 +36,8 @@ t_bool	ft_init_cub_color(t_cub *cub, const char **specs)
 {
 	char	**rgb;
 
-	while (**specs != 'F')
+	specs += 4 * (ft_strchr (TEX_IDS, **specs) != NULL);
+	while (**specs == '\0')
 		specs++;
 	rgb = ft_extract_rgb_val (*specs + 1);
 	if (!rgb)
@@ -67,7 +68,8 @@ t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 	char	*texture;
 	int		i;
 
-	while (**specs != 'N')
+	specs += 2 * (ft_strchr (COL_IDS, **specs) != NULL);
+	while (**specs == '\0')
 		specs++;
 	i = 0;
 	while (i < 4)
@@ -87,4 +89,3 @@ t_bool	ft_init_cub_texture(t_cub *cub, const char **specs)
 	}
 	return (TRUE);
 }
-

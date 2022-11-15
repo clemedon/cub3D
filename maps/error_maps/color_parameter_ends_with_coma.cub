@@ -1,10 +1,11 @@
-NO ../../textures/WALL1.xpm
-EA ../../textures/WALL2.xpm
-WE ../../textures/WALL3.xpm
-SO ../../textures/WALL4.xpm
+F  54,245,
+C 255,30,
 
-C 252,253,
-F 252,253,255
+
+NO resources/brickov.xpm
+EA resources/brickov.xpm
+SO resources/brickov.xpm
+WE resources/brickov.xpm
 
 1111111111
 1000000001
