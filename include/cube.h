@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/15 10:50:59 by athirion          #+#    #+#             */
+/*   Updated: 2022/11/15 11:24:36 by athirion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUBE_H
 # define CUBE_H
 
@@ -51,17 +63,18 @@
 # define TILE_SIZE	64
 # define MAP_SCALE	0.5
 # define MINIMAP_SIZE 32
+
 /* Window dimensions */
-# define WIN_HEIGHT	800
-# define WIN_WIDTH	1200
+# define WIN_HEIGHT	1200
+# define WIN_WIDTH	1600
 
 /* Player constants */
 # define LEFT		-1
 # define RIGHT		1
 # define BACK		-1
 # define FRONT		1
-# define TURN_SPEED	0.08
-# define WALK_SPEED	10
+# define TURN_SPEED	0.09
+# define WALK_SPEED	18
 
 /* Math constants */
 

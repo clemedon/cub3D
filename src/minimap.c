@@ -6,7 +6,7 @@
 /*   By: athirion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:00:32 by athirion          #+#    #+#             */
-/*   Updated: 2022/11/14 17:01:48 by athirion         ###   ########.fr       */
+/*   Updated: 2022/11/15 10:54:36 by athirion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,17 @@ static int	ft_render_minimap(t_data *data, t_minimap *minimap)
 
 void	ft_minimap(t_data *data)
 {
-	if (data->cub.minimap == 1)
+	float	mini_width;
+	float	mini_height;
+
+	mini_width = data->cub.width * MINIMAP_SIZE * MAP_SCALE;
+	mini_height = data->cub.height * MINIMAP_SIZE * MAP_SCALE;
+	if (data->cub.minimap == 1
+		&& mini_height < WIN_HEIGHT && mini_width < WIN_WIDTH)
 	{
 		if (!ft_init_minimap(data, &data->minimap))
-		{
-			ft_free_minimap(&data->minimap);
 			ft_quit(data);
-		}
 		if (!ft_render_minimap(data, &data->minimap))
-		{
-			ft_free_minimap(&data->minimap);
 			ft_quit(data);
-		}
 	}
 }
